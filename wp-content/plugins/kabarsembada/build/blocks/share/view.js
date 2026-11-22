@@ -1,0 +1,1 @@
+document.querySelectorAll(".ks-share__copy").forEach(t=>{const e=t.parentElement.querySelector(".ks-share__note");t.addEventListener("click",async()=>{try{await window.navigator.clipboard.writeText(t.dataset.url),t.dataset.copied="",e.textContent=e.dataset.done}catch{e.textContent=e.dataset.fail}window.setTimeout(()=>{delete t.dataset.copied,e.textContent=""},2500)})});

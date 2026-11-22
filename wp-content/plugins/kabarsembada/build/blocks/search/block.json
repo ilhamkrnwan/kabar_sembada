@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "kabarsembada/search",
+  "version": "0.1.0",
+  "title": "Pencarian",
+  "category": "kabarsembada",
+  "icon": "search",
+  "description": "Tombol yang membuka overlay pencarian: hasil langsung, topik populer, kanal, dan riwayat pencarian. Tekan / untuk membuka.",
+  "keywords": [
+    "search",
+    "cari",
+    "pencarian"
+  ],
+  "textdomain": "kabarsembada",
+  "attributes": {
+    "showLabel": {
+      "type": "boolean",
+      "default": false
+    },
+    "topics": {
+      "type": "number",
+      "default": 5
+    },
+    "channels": {
+      "type": "number",
+      "default": 4
+    }
+  },
+  "supports": {
+    "html": false,
+    "spacing": {
+      "margin": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

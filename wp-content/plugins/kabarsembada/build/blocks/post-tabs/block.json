@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "kabarsembada/post-tabs",
+  "version": "0.1.0",
+  "title": "Tab Berita",
+  "category": "kabarsembada",
+  "icon": "index-card",
+  "description": "Daftar berita dalam tab: Terbaru / Paling Dibaca, atau satu tab per topik (tag).",
+  "keywords": [
+    "tab",
+    "terbaru",
+    "paling dibaca",
+    "fokus",
+    "topik"
+  ],
+  "textdomain": "kabarsembada",
+  "attributes": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "latest",
+        "topics"
+      ],
+      "default": "latest"
+    },
+    "number": {
+      "type": "number",
+      "default": 3
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  },
+  "supports": {
+    "html": false,
+    "spacing": {
+      "margin": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

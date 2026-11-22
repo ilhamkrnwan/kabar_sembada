@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "kabarsembada/share",
+  "version": "0.1.0",
+  "title": "Bagikan",
+  "category": "kabarsembada",
+  "icon": "share",
+  "description": "Tombol bagikan ke WhatsApp, Facebook, X, dan salin tautan.",
+  "keywords": [
+    "share",
+    "bagikan",
+    "whatsapp"
+  ],
+  "textdomain": "kabarsembada",
+  "usesContext": [
+    "postId"
+  ],
+  "supports": {
+    "html": false,
+    "spacing": {
+      "margin": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

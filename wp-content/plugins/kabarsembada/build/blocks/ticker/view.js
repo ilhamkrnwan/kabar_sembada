@@ -1,0 +1,1 @@
+document.querySelectorAll(".ks-ticker").forEach(e=>{const t=e.querySelector(".ks-ticker__toggle");t?.addEventListener("click",()=>{const s=e.classList.toggle("is-paused");t.setAttribute("aria-pressed",String(s))})});

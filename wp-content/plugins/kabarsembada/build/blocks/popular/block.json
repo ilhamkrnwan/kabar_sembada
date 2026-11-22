@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "kabarsembada/popular",
+  "version": "0.1.0",
+  "title": "Terpopuler",
+  "category": "kabarsembada",
+  "icon": "chart-bar",
+  "description": "Daftar bernomor artikel dengan views terbanyak.",
+  "keywords": [
+    "populer",
+    "terpopuler",
+    "paling dibaca",
+    "views"
+  ],
+  "textdomain": "kabarsembada",
+  "attributes": {
+    "number": {
+      "type": "number",
+      "default": 5
+    },
+    "days": {
+      "type": "number",
+      "default": 0
+    },
+    "headingLevel": {
+      "type": "number",
+      "default": 3
+    }
+  },
+  "usesContext": [
+    "postId"
+  ],
+  "supports": {
+    "html": false,
+    "spacing": {
+      "margin": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}
