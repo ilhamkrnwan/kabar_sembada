@@ -201,10 +201,14 @@ a:hover .ks-title {
 }
 
 .ks-lead {
-	display: grid;
-	gap: 0.6rem;
+	display: block;
 
-	.ks-thumb {
+	> * + * {
+		margin-top: 0.6rem;
+	}
+
+	.ks-thumb img {
+		height: auto;
 		aspect-ratio: 16 / 10;
 	}
 

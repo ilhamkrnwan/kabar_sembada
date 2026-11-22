@@ -70,8 +70,9 @@ function kabarsembada_query_loop_vars( $query, $block ) {
 	}
 
 	if ( ! empty( $attrs['ksRelated'] ) && is_singular() ) {
-		$post                  = get_queried_object();
-		$query['post__not_in'] = array( $post->ID );
+		$post                         = get_queried_object();
+		$query['post__not_in']        = array_merge( isset( $query['post__not_in'] ) ? (array) $query['post__not_in'] : array(), array( $post->ID ) );
+		$query['ignore_sticky_posts'] = true;
 		$categories            = wp_get_post_categories( $post->ID );
 
 		if ( $categories ) {
@@ -146,4 +147,50 @@ function kabarsembada_get_posts( $args = array() ) {
 	}
 
 	return get_posts( $query );
+}
+
+/**
+ * Slugs of the tags most used by posts published in the last N days.
+ *
+ * Cached for an hour: counting tags over recent posts is not free on a site
+ * with thousands of tags.
+ *
+ * @param int $number How many tags.
+ * @param int $days   Window in days.
+ * @return string[]
+ */
+function kabarsembada_recent_top_tags( $number = 4, $days = 30 ) {
+	$key   = 'kabarsembada_top_tags_' . (int) $number . '_' . (int) $days;
+	$slugs = get_transient( $key );
+
+	if ( is_array( $slugs ) ) {
+		return $slugs;
+	}
+
+	$ids    = get_posts(
+		array(
+			'post_type'           => 'post',
+			'post_status'         => 'publish',
+			'posts_per_page'      => 300,
+			'fields'              => 'ids',
+			'ignore_sticky_posts' => true,
+			'no_found_rows'       => true,
+			'date_query'          => array( array( 'after' => absint( $days ) . ' days ago' ) ),
+		)
+	);
+	$counts = array();
+
+	foreach ( $ids ? wp_get_object_terms( $ids, 'post_tag', array( 'fields' => 'all_with_object_id' ) ) : array() as $term ) {
+		$counts[ $term->slug ] = isset( $counts[ $term->slug ] ) ? $counts[ $term->slug ] + 1 : 1;
+	}
+
+	arsort( $counts );
+	// Topics need more than one article to be worth a tab.
+	$slugs = array_slice( array_keys( array_filter( $counts, static function ( $count ) {
+		return $count > 1;
+	} ) ), 0, $number );
+
+	set_transient( $key, $slugs, HOUR_IN_SECONDS );
+
+	return $slugs;
 }
