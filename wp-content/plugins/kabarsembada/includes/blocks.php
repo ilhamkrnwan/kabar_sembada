@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
  * @return string[]
  */
 function kabarsembada_blocks() {
-	return array( 'ticker', 'post-tabs', 'popular', 'share', 'search' );
+	return array( 'ticker', 'post-tabs', 'popular', 'share', 'search', 'subscribe' );
 }
 
 /**

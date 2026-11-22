@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "kabarsembada/subscribe",
+  "version": "0.1.0",
+  "title": "Form Langganan",
+  "category": "kabarsembada",
+  "icon": "email-alt",
+  "description": "Form surel newsletter. Alamat tersimpan di menu Pelanggan.",
+  "keywords": [
+    "newsletter",
+    "langganan",
+    "surel",
+    "email"
+  ],
+  "textdomain": "kabarsembada",
+  "attributes": {
+    "placeholder": {
+      "type": "string",
+      "default": "nama@surel.com"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Langganan"
+    }
+  },
+  "supports": {
+    "html": false,
+    "spacing": {
+      "margin": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}
