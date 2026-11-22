@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 60" role="img" aria-label="Kabar Sembada">
+  <!-- Kabar Sembada mark, redrawn from the site's favicon (original file unavailable: kabarsembada.com served an empty page).
+       Replace this file with the official logo when available. -->
+  <g fill="#61BBF9">
+    <!-- K: outer stroke, inner stroke, joining band, inner leg -->
+    <polygon points="30,1 38,1 9,57 1,57"/>
+    <polygon points="38,11 46,11 36,30 28,30"/>
+    <polygon points="17,25 39,25 35,33 13,33"/>
+    <polygon points="18,34 26,34 16,56 8,56"/>
+    <!-- S: small wedge, base band -->
+    <polygon points="32,40 39,50 25,50"/>
+    <rect x="24" y="49" width="30" height="8"/>
+    <!-- right peak: cap, left leg, right leg -->
+    <polygon points="46,18 56,34 36,34"/>
+    <polygon points="36,34 44,34 50,49 42,49"/>
+    <polygon points="46,34 55,34 65,54 56,54"/>
+  </g>
+</svg>

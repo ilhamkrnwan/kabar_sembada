@@ -1,0 +1,41 @@
+<!-- wp:template-part {"slug":"topbar","tagName":"div"} /-->
+
+<!-- wp:template-part {"slug":"header","tagName":"header","className":"ks-site-header"} /-->
+
+<!-- wp:group {"tagName":"main","anchor":"konten","className":"ks-main","layout":{"type":"constrained"}} -->
+<main id="konten" class="wp-block-group ks-main"><!-- wp:group {"className":"ks-archive__head","layout":{"type":"default"}} -->
+<div class="wp-block-group ks-archive__head"><!-- wp:heading {"level":1} -->
+<h1 class="wp-block-heading">Halaman tidak ditemukan</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Tautan mungkin sudah berubah atau beritanya dipindah. Coba cari, atau baca berita terbaru di bawah.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:search {"label":"Cari berita","showLabel":false,"placeholder":"Cari berita di Kabar Sembada","buttonText":"Cari","className":"ks-search-form"} /--></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"align":"wide","className":"ks-section","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide ks-section"><!-- wp:group {"className":"ks-section__head","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+<div class="wp-block-group ks-section__head"><!-- wp:heading -->
+<h2 class="wp-block-heading">Berita Terbaru</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
+
+<!-- wp:query {"queryId":61,"query":{"perPage":6,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"ignore","inherit":false}} -->
+<div class="wp-block-query"><!-- wp:post-template {"className":"is-style-ks-grid"} -->
+<!-- wp:post-featured-image {"isLink":true,"sizeSlug":"medium_large"} /-->
+
+<!-- wp:group {"className":"ks-meta","layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group ks-meta"><!-- wp:post-terms {"term":"category","className":"ks-card-term"} /-->
+
+<!-- wp:post-date {"format":"human-diff"} /--></div>
+<!-- /wp:group -->
+
+<!-- wp:post-title {"level":3,"isLink":true} /-->
+<!-- /wp:post-template --></div>
+<!-- /wp:query --></div>
+<!-- /wp:group --></main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

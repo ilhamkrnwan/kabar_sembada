@@ -1,0 +1,97 @@
+<!-- wp:template-part {"slug":"topbar","tagName":"div"} /-->
+
+<!-- wp:template-part {"slug":"header","tagName":"header","className":"ks-site-header"} /-->
+
+<!-- wp:group {"tagName":"main","anchor":"konten","className":"ks-main ks-single","layout":{"type":"constrained"}} -->
+<main id="konten" class="wp-block-group ks-main ks-single"><!-- wp:breadcrumbs {"prefersTaxonomy":true,"separator":"›","showCurrentItem":false,"align":"wide","className":"ks-crumbs"} /-->
+
+<!-- wp:columns {"align":"wide","className":"ks-columns"} -->
+<div class="wp-block-columns alignwide ks-columns"><!-- wp:column {"width":"66.66%"} -->
+<div class="wp-block-column" style="flex-basis:66.66%"><!-- wp:group {"tagName":"article","className":"ks-article","layout":{"type":"default"}} -->
+<article class="wp-block-group ks-article"><!-- wp:group {"tagName":"header","className":"ks-article__head","layout":{"type":"default"}} -->
+<header class="wp-block-group ks-article__head"><!-- wp:post-terms {"term":"category","className":"is-style-ks-pill"} /-->
+
+<!-- wp:post-title {"level":1} /-->
+
+<!-- wp:post-excerpt {"className":"ks-deck"} /-->
+
+<!-- wp:group {"className":"ks-byline","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+<div class="wp-block-group ks-byline"><!-- wp:group {"className":"ks-byline__author","layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group ks-byline__author"><!-- wp:post-author-name {"isLink":true} /-->
+
+<!-- wp:post-date {"format":"j F Y, H.i"} /-->
+
+<!-- wp:post-time-to-read /--></div>
+<!-- /wp:group -->
+
+<!-- wp:kabarsembada/share /--></div>
+<!-- /wp:group --></header>
+<!-- /wp:group -->
+
+<!-- wp:post-featured-image {"sizeSlug":"large","className":"ks-lead-figure"} /-->
+
+<!-- wp:post-content {"className":"ks-prose","layout":{"type":"default"}} /-->
+
+<!-- wp:post-terms {"term":"post_tag","className":"is-style-ks-tags"} /-->
+
+<!-- wp:pattern {"slug":"kabarsembada/comments"} /--></article>
+<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"33.33%","className":"ks-sticky"} -->
+<div class="wp-block-column ks-sticky" style="flex-basis:33.33%"><!-- wp:group {"className":"is-style-ks-box ks-section","layout":{"type":"default"}} -->
+<div class="wp-block-group is-style-ks-box ks-section"><!-- wp:heading {"level":2,"className":"ks-side-title"} -->
+<h2 class="wp-block-heading ks-side-title">Paling Dibaca</h2>
+<!-- /wp:heading -->
+
+<!-- wp:kabarsembada/popular {"headingLevel":3} /--></div>
+<!-- /wp:group --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
+
+<!-- wp:group {"align":"wide","className":"ks-section","layout":{"type":"default"},"ksMotion":"fade-up","ksStagger":true} -->
+<div class="wp-block-group alignwide ks-section"><!-- wp:group {"className":"ks-section__head","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+<div class="wp-block-group ks-section__head"><!-- wp:heading -->
+<h2 class="wp-block-heading">Berita Terkait</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
+
+<!-- wp:query {"queryId":31,"query":{"perPage":3,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"ignore","inherit":false,"ksRelated":true},"namespace":"kabarsembada/related"} -->
+<div class="wp-block-query"><!-- wp:post-template {"className":"is-style-ks-grid"} -->
+<!-- wp:post-featured-image {"isLink":true,"sizeSlug":"medium_large"} /-->
+
+<!-- wp:group {"className":"ks-meta","layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group ks-meta"><!-- wp:post-terms {"term":"category","className":"ks-card-term"} /-->
+
+<!-- wp:post-date {"format":"human-diff"} /--></div>
+<!-- /wp:group -->
+
+<!-- wp:post-title {"level":3,"isLink":true} /-->
+<!-- /wp:post-template --></div>
+<!-- /wp:query --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"align":"wide","className":"ks-section","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide ks-section"><!-- wp:group {"className":"ks-section__head","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+<div class="wp-block-group ks-section__head"><!-- wp:heading -->
+<h2 class="wp-block-heading">Berita Lainnya</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
+
+<!-- wp:query {"queryId":32,"query":{"perPage":6,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"ignore","inherit":false}} -->
+<div class="wp-block-query"><!-- wp:post-template {"className":"is-style-ks-feed"} -->
+<!-- wp:post-featured-image {"isLink":true,"sizeSlug":"medium"} /-->
+
+<!-- wp:group {"className":"ks-card__body","layout":{"type":"default"}} -->
+<div class="wp-block-group ks-card__body"><!-- wp:post-terms {"term":"category","className":"ks-card-term"} /-->
+
+<!-- wp:post-title {"level":3,"isLink":true} /-->
+
+<!-- wp:post-date {"format":"human-diff"} /--></div>
+<!-- /wp:group -->
+<!-- /wp:post-template --></div>
+<!-- /wp:query --></div>
+<!-- /wp:group --></main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

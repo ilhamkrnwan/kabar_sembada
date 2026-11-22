@@ -1,0 +1,191 @@
+<?php
+/**
+ * Kabar Sembada theme setup.
+ *
+ * Pure block theme: layout lives in templates, parts and patterns. This file
+ * only loads the stylesheet and script, registers block styles, and filters a
+ * few core blocks.
+ *
+ * @package KabarSembada
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Theme supports and editor styles.
+ *
+ * @return void
+ */
+function kabarsembada_theme_setup() {
+	remove_theme_support( 'core-block-patterns' );
+	add_editor_style( 'assets/css/theme.css' );
+}
+add_action( 'after_setup_theme', 'kabarsembada_theme_setup' );
+
+/**
+ * Front-end stylesheet and script, versioned by file time.
+ *
+ * @return void
+ */
+function kabarsembada_theme_assets() {
+	$css = get_theme_file_path( 'assets/css/theme.css' );
+	$js  = get_theme_file_path( 'assets/js/theme.js' );
+
+	wp_enqueue_style( 'kabarsembada-theme', get_theme_file_uri( 'assets/css/theme.css' ), array(), (string) filemtime( $css ) );
+	wp_enqueue_script(
+		'kabarsembada-theme',
+		get_theme_file_uri( 'assets/js/theme.js' ),
+		array(),
+		(string) filemtime( $js ),
+		array(
+			'in_footer' => true,
+			'strategy'  => 'defer',
+		)
+	);
+}
+add_action( 'wp_enqueue_scripts', 'kabarsembada_theme_assets' );
+
+/**
+ * Block styles. Their CSS lives in assets/css/theme.css.
+ *
+ * @return void
+ */
+function kabarsembada_register_block_styles() {
+	$styles = array(
+		'core/post-template' => array(
+			'ks-hero'     => __( 'Berita utama', 'kabarsembada' ),
+			'ks-rail'     => __( 'Carousel kartu', 'kabarsembada' ),
+			'ks-featured' => __( 'Pilihan (1 besar + daftar)', 'kabarsembada' ),
+			'ks-feed'     => __( 'Daftar berita', 'kabarsembada' ),
+			'ks-grid'     => __( 'Grid kartu', 'kabarsembada' ),
+		),
+		'core/post-terms'    => array(
+			'ks-pill' => __( 'Pil', 'kabarsembada' ),
+			'ks-tags' => __( 'Tag', 'kabarsembada' ),
+		),
+		'core/tag-cloud'     => array(
+			'ks-pills' => __( 'Pil', 'kabarsembada' ),
+		),
+		'core/group'         => array(
+			'ks-box'    => __( 'Kotak samping', 'kabarsembada' ),
+			'ks-action' => __( 'Kotak aksi warga', 'kabarsembada' ),
+		),
+	);
+
+	foreach ( $styles as $block => $variants ) {
+		foreach ( $variants as $name => $label ) {
+			register_block_style(
+				$block,
+				array(
+					'name'  => $name,
+					'label' => $label,
+				)
+			);
+		}
+	}
+}
+add_action( 'init', 'kabarsembada_register_block_styles' );
+
+/**
+ * Pattern category for the theme's sections.
+ *
+ * @return void
+ */
+function kabarsembada_register_pattern_category() {
+	register_block_pattern_category( 'kabarsembada', array( 'label' => __( 'Kabar Sembada', 'kabarsembada' ) ) );
+}
+add_action( 'init', 'kabarsembada_register_pattern_category' );
+
+/**
+ * The article deck (an excerpt with the class ks-deck) shows only a
+ * hand-written excerpt; an automatic one would repeat the first paragraph.
+ *
+ * @param string   $block_content Rendered block.
+ * @param array    $block         Parsed block.
+ * @param WP_Block $instance      Block instance.
+ * @return string
+ */
+function kabarsembada_manual_deck_only( $block_content, $block, $instance ) {
+	$class = isset( $block['attrs']['className'] ) ? (string) $block['attrs']['className'] : '';
+
+	if ( false === strpos( $class, 'ks-deck' ) ) {
+		return $block_content;
+	}
+
+	$post_id = isset( $instance->context['postId'] ) ? (int) $instance->context['postId'] : (int) get_the_ID();
+
+	return has_excerpt( $post_id ) ? $block_content : '';
+}
+add_filter( 'render_block_core/post-excerpt', 'kabarsembada_manual_deck_only', 10, 3 );
+
+/**
+ * Show one category on cards: the primary one when the post has several.
+ *
+ * Only for post-terms blocks inside a .ks-meta group (cards); the article
+ * header and tag lists keep every term.
+ *
+ * @param WP_Term[]|false|WP_Error $terms    Terms.
+ * @param int                      $post_id  Post ID.
+ * @param string                   $taxonomy Taxonomy.
+ * @return WP_Term[]|false|WP_Error
+ */
+function kabarsembada_card_primary_term( $terms, $post_id, $taxonomy ) {
+	if ( 'category' !== $taxonomy || ! is_array( $terms ) || count( $terms ) < 2 || ! kabarsembada_card_terms_active() || ! function_exists( 'kabarsembada_primary_category' ) ) {
+		return $terms;
+	}
+
+	// The lookup reads categories through this same filter; switch it off meanwhile.
+	kabarsembada_card_terms_active( false );
+	$primary = kabarsembada_primary_category( $post_id );
+	kabarsembada_card_terms_active( true );
+
+	return $primary ? array( $primary ) : array( $terms[0] );
+}
+add_filter( 'get_the_terms', 'kabarsembada_card_primary_term', 10, 3 );
+
+/**
+ * Whether a card's post-terms block is rendering right now.
+ *
+ * @param bool|null $set New state, or null to read.
+ * @return bool
+ */
+function kabarsembada_card_terms_active( $set = null ) {
+	static $active = false;
+
+	if ( null !== $set ) {
+		$active = $set;
+	}
+
+	return $active;
+}
+
+/**
+ * Flag card post-terms blocks (attribute className contains ks-card-term)
+ * while they render.
+ *
+ * @param string|null $pre   Short-circuit content.
+ * @param array       $block Parsed block.
+ * @return string|null
+ */
+function kabarsembada_card_terms_start( $pre, $block ) {
+	if ( 'core/post-terms' === $block['blockName'] ) {
+		$class = isset( $block['attrs']['className'] ) ? (string) $block['attrs']['className'] : '';
+		kabarsembada_card_terms_active( false !== strpos( $class, 'ks-card-term' ) );
+	}
+
+	return $pre;
+}
+add_filter( 'pre_render_block', 'kabarsembada_card_terms_start', 10, 2 );
+
+/**
+ * Reset the card flag after the post-terms block.
+ *
+ * @param string $block_content Rendered block.
+ * @return string
+ */
+function kabarsembada_card_terms_end( $block_content ) {
+	kabarsembada_card_terms_active( false );
+
+	return $block_content;
+}
+add_filter( 'render_block_core/post-terms', 'kabarsembada_card_terms_end' );

@@ -1,0 +1,198 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.7/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": true,
+		"useRootPaddingAwareAlignments": true,
+		"layout": {
+			"contentSize": "720px",
+			"wideSize": "1200px"
+		},
+		"color": {
+			"defaultDuotone": false,
+			"defaultGradients": false,
+			"defaultPalette": false,
+			"palette": [
+				{ "slug": "brand", "name": "Brand", "color": "oklch(74.7% 0.1517 235.8)" },
+				{ "slug": "brand-hover", "name": "Brand hover", "color": "oklch(69% 0.155 237)" },
+				{ "slug": "on-brand", "name": "Teks di atas brand", "color": "oklch(22% 0.05 245)" },
+				{ "slug": "brand-ink", "name": "Brand gelap (tautan)", "color": "oklch(45% 0.13 240)" },
+				{ "slug": "brand-tint", "name": "Brand tipis", "color": "oklch(95.5% 0.025 235.8)" },
+				{ "slug": "brand-tint-2", "name": "Brand tipis 2", "color": "oklch(91% 0.05 235.8)" },
+				{ "slug": "ink", "name": "Tinta", "color": "oklch(20% 0.025 250)" },
+				{ "slug": "ink-2", "name": "Tinta 2", "color": "oklch(42% 0.02 250)" },
+				{ "slug": "ink-3", "name": "Tinta 3", "color": "oklch(52% 0.018 250)" },
+				{ "slug": "line", "name": "Garis", "color": "oklch(91% 0.008 250)" },
+				{ "slug": "surface", "name": "Permukaan", "color": "oklch(97% 0.005 250)" },
+				{ "slug": "bg", "name": "Latar", "color": "oklch(99.5% 0.002 250)" },
+				{ "slug": "navy", "name": "Navy", "color": "oklch(21% 0.04 250)" },
+				{ "slug": "white", "name": "Putih", "color": "#ffffff" }
+			],
+			"gradients": [
+				{
+					"slug": "photo-fade",
+					"name": "Foto memudar",
+					"gradient": "linear-gradient(180deg, rgba(0,0,0,0) 38%, oklch(15% 0.03 250 / 0.88) 100%)"
+				}
+			]
+		},
+		"typography": {
+			"defaultFontSizes": false,
+			"fluid": true,
+			"fontFamilies": [
+				{
+					"slug": "manrope",
+					"name": "Manrope",
+					"fontFamily": "Manrope, system-ui, sans-serif",
+					"fontFace": [
+						{
+							"fontFamily": "Manrope",
+							"fontStyle": "normal",
+							"fontWeight": "200 800",
+							"fontDisplay": "swap",
+							"src": [ "file:./assets/fonts/manrope-latin-wght-normal.woff2" ]
+						}
+					]
+				}
+			],
+			"fontSizes": [
+				{ "slug": "x-small", "name": "Sangat kecil", "size": "0.75rem", "fluid": false },
+				{ "slug": "small", "name": "Kecil", "size": "0.8125rem", "fluid": false },
+				{ "slug": "medium", "name": "Sedang", "size": "0.9375rem", "fluid": false },
+				{ "slug": "base", "name": "Dasar", "size": "1rem", "fluid": false },
+				{ "slug": "large", "name": "Besar", "size": "1.125rem", "fluid": false },
+				{ "slug": "x-large", "name": "Judul seksi", "size": "1.5rem", "fluid": { "min": "1.25rem", "max": "1.5rem" } },
+				{ "slug": "xx-large", "name": "Judul hero", "size": "2.4rem", "fluid": { "min": "1.6rem", "max": "2.4rem" } },
+				{ "slug": "huge", "name": "Judul artikel", "size": "3rem", "fluid": { "min": "1.9rem", "max": "3rem" } }
+			]
+		},
+		"spacing": {
+			"defaultSpacingSizes": false,
+			"units": [ "px", "em", "rem", "%", "vw", "vh" ],
+			"spacingSizes": [
+				{ "slug": "10", "name": "2XS", "size": "0.5rem" },
+				{ "slug": "20", "name": "XS", "size": "0.75rem" },
+				{ "slug": "30", "name": "S", "size": "1rem" },
+				{ "slug": "40", "name": "M", "size": "1.5rem" },
+				{ "slug": "50", "name": "L", "size": "2rem" },
+				{ "slug": "60", "name": "XL", "size": "clamp(2.5rem, 5vw, 4rem)" },
+				{ "slug": "70", "name": "2XL", "size": "clamp(3rem, 6vw, 5rem)" }
+			]
+		},
+		"shadow": {
+			"defaultPresets": false,
+			"presets": [
+				{ "slug": "card", "name": "Kartu", "shadow": "0 10px 30px -12px oklch(25% 0.04 250 / 0.22)" }
+			]
+		},
+		"custom": {
+			"radius": "16px",
+			"radius-lg": "20px",
+			"ease": "cubic-bezier(0.16, 1, 0.3, 1)",
+			"header-height": "76px"
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--bg)",
+			"text": "var(--wp--preset--color--ink)"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--manrope)",
+			"fontSize": "var(--wp--preset--font-size--base)",
+			"fontWeight": "500",
+			"lineHeight": "1.55"
+		},
+		"spacing": {
+			"blockGap": "1.5rem",
+			"padding": {
+				"left": "1.25rem",
+				"right": "1.25rem"
+			}
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontWeight": "800",
+					"lineHeight": "1.2",
+					"letterSpacing": "-0.02em"
+				}
+			},
+			"h1": { "typography": { "fontSize": "var(--wp--preset--font-size--huge)", "lineHeight": "1.12", "letterSpacing": "-0.03em" } },
+			"h2": { "typography": { "fontSize": "var(--wp--preset--font-size--x-large)" } },
+			"h3": { "typography": { "fontSize": "var(--wp--preset--font-size--large)" } },
+			"h4": { "typography": { "fontSize": "var(--wp--preset--font-size--base)" } },
+			"link": {
+				"color": { "text": "var(--wp--preset--color--brand-ink)" },
+				"typography": { "textDecoration": "none" },
+				":hover": { "typography": { "textDecoration": "underline" } }
+			},
+			"button": {
+				"border": { "radius": "99px" },
+				"color": {
+					"background": "var(--wp--preset--color--brand)",
+					"text": "var(--wp--preset--color--on-brand)"
+				},
+				"typography": { "fontWeight": "800", "fontSize": "var(--wp--preset--font-size--base)" },
+				"spacing": { "padding": { "top": "0.7rem", "bottom": "0.7rem", "left": "1.5rem", "right": "1.5rem" } },
+				":hover": { "color": { "background": "var(--wp--preset--color--brand-hover)" } }
+			},
+			"caption": {
+				"typography": { "fontSize": "var(--wp--preset--font-size--small)", "fontWeight": "600" },
+				"color": { "text": "var(--wp--preset--color--ink-3)" }
+			}
+		},
+		"blocks": {
+			"core/post-title": {
+				"elements": {
+					"link": {
+						"color": { "text": "inherit" },
+						":hover": {
+							"color": { "text": "var(--wp--preset--color--brand-ink)" },
+							"typography": { "textDecoration": "none" }
+						}
+					}
+				}
+			},
+			"core/post-date": {
+				"typography": { "fontSize": "var(--wp--preset--font-size--small)", "fontWeight": "600" },
+				"color": { "text": "var(--wp--preset--color--ink-3)" }
+			},
+			"core/post-terms": {
+				"typography": { "fontSize": "var(--wp--preset--font-size--small)", "fontWeight": "800" }
+			},
+			"core/separator": {
+				"color": { "text": "var(--wp--preset--color--line)" }
+			},
+			"core/quote": {
+				"border": { "radius": "var(--wp--custom--radius)", "width": "0" },
+				"color": { "background": "var(--wp--preset--color--brand-tint)" },
+				"spacing": { "padding": { "top": "1.75rem", "bottom": "1.5rem", "left": "1.75rem", "right": "1.75rem" } },
+				"typography": { "fontSize": "1.25rem", "fontWeight": "700", "lineHeight": "1.5" }
+			},
+			"core/image": {
+				"border": { "radius": "var(--wp--custom--radius)" }
+			},
+			"core/post-featured-image": {
+				"border": { "radius": "var(--wp--custom--radius)" }
+			},
+			"core/navigation": {
+				"typography": { "fontSize": "var(--wp--preset--font-size--medium)", "fontWeight": "700" }
+			},
+			"core/site-title": {
+				"typography": { "fontSize": "1.375rem", "fontWeight": "800", "letterSpacing": "-0.03em" },
+				"elements": {
+					"link": {
+						"color": { "text": "var(--wp--preset--color--ink)" },
+						":hover": { "typography": { "textDecoration": "none" } }
+					}
+				}
+			}
+		}
+	},
+	"templateParts": [
+		{ "name": "topbar", "title": "Bilah atas", "area": "header" },
+		{ "name": "header", "title": "Header", "area": "header" },
+		{ "name": "footer", "title": "Footer", "area": "footer" }
+	]
+}
