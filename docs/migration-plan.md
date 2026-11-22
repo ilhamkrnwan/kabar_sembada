@@ -144,7 +144,9 @@ migration/
 9. **Cleanup** — hitung ulang `count` term (hanya relasi ke post yang
    dibawa), buang term yang jadi 0 (kecuali Uncategorized), set
    `AUTO_INCREMENT` di atas ID tertinggi, hapus `_thumbnail_id` yang menunjuk
-   attachment yang tidak ada. Set display name admin (M13).
+   attachment yang tidak ada. Set display name admin (M13). Buat satu
+   `wp_navigation` "Kanal" berisi 7 kategori dengan artikel terbanyak
+   (header memakainya otomatis; redaksi bisa mengubahnya di Site Editor).
 10. **Salin gambar** — `70-files.py` membaca daftar `_wp_attached_file` dari
     DB target, menyalin hanya file itu dari backup ke
     `wp-content/uploads/YYYY/MM/` repo (sudah di-gitignore). Ekstensi
