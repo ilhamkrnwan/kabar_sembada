@@ -1,18 +1,41 @@
-# Sekeco — Aturan Kerja
+# Kabar Sembada — Aturan Kerja
+
+Portal berita regional Sleman. Rencana dan keputusan: `docs/plan.md`.
 
 ## Repository
 
-- Satu repositori (monorepo) di root. Tema dan plugin hidup berdampingan karena
-  saling bergantung (pattern tema memakai blok `sekeco/*`).
+- Satu repositori (monorepo) di root, remote `ilhamkrnwan/kabar_sembada`.
+  Tema dan plugin hidup berdampingan karena saling bergantung (pattern tema
+  memakai blok `kabarsembada/*`).
 - Branch utama `main`. Tidak ada tag atau release.
 - Yang dilacak git hanya kode proyek:
-  - `wp-content/themes/sekeco/`
-  - `wp-content/plugins/sekeco/`
-  - `compose.yml`, `.gitignore`, `.gitattributes`, `AGENTS.md`, `README.md`
+  - `wp-content/themes/kabarsembada/`
+  - `wp-content/plugins/kabarsembada/`
+  - `docs/`
+  - `compose.yml`, `.gitignore`, `.gitattributes`, `AGENTS.md`, `README.md`,
+    `PRODUCT.md`, `DESIGN.md`
+- `wp-content/themes/sekeco/` dan `wp-content/plugins/sekeco/` hanya referensi
+  selama pembangunan. Jangan diaktifkan, jangan diubah. Dihapus setelah Kabar
+  Sembada stabil (task T3.3).
 - WordPress core (`wp-admin/`, `wp-includes/`, `wp-*.php`, `license.txt`,
   `readme.html`) berasal dari image Docker — jangan di-commit.
 - Jangan pernah commit: `wp-content/uploads/`, `wp-content/upgrade/`,
-  `wp-content/debug.log`, `.db/`, `node_modules/`, plugin pihak ketiga.
+  `wp-content/debug.log`, `.db/`, `node_modules/`, plugin pihak ketiga, dump
+  database situs lama.
+
+## Aturan Gutenberg
+
+- Semua tampilan dari blok native. Tanpa page builder.
+- Tema = tema blok murni (`theme.json` v3). Plugin memegang blok kustom, meta,
+  binding, SEO, views, motion.
+- Blok kustom dinamis: `block.json` `apiVersion: 3`,
+  `render: file:./render.php`, registrasi dari `build/blocks/<name>`.
+- Utamakan blok core + block style. Blok kustom hanya bila core tidak bisa.
+- Markup tersimpan berubah → tambah `deprecated`, jangan hapus atribut.
+- Menu dikelola editor, tanpa link hardcode.
+- Konten jujur: state kosong menyembunyikan diri, tanpa UI palsu.
+- String UI Bahasa Indonesia, dibungkus `__()` dengan text domain
+  `kabarsembada`.
 
 ## Format commit
 
@@ -20,8 +43,8 @@
 
 Scope:
 
-- `theme` — tema Sekeco
-- `plugin` — plugin Sekeco
+- `theme` — tema Kabar Sembada
+- `plugin` — plugin Kabar Sembada
 - `repo` — Docker, gitignore, aturan, tooling
 - `docs` — dokumentasi
 
@@ -30,8 +53,8 @@ Type: `feat`, `fix`, `refactor`, `style`, `docs`, `chore`, `perf`, `test`.
 Contoh:
 
 ```
-feat(plugin): add autoresponder to form submissions
-fix(theme): keep works filter aligned on mobile
+feat(plugin): add a views counter for posts
+fix(theme): keep the ticker readable on mobile
 chore(repo): ignore local database volume
 ```
 
@@ -45,7 +68,7 @@ Aturan:
 
 ## Sebelum commit
 
-- Jika menyentuh `wp-content/plugins/sekeco/src/`:
+- Jika menyentuh `wp-content/plugins/kabarsembada/src/`:
   `bun run lint:js && bun run lint:css && bun run build`, lalu ikutkan `build/`.
 - Jika menyentuh PHP: `php -l` pada file yang berubah.
 - Pastikan tidak ada `wp-content/debug.log` baru dan tidak ada data uji tertinggal.
@@ -61,7 +84,7 @@ Aturan:
 
 ## Versi
 
-- Tema: `Version:` di `wp-content/themes/sekeco/style.css`.
-- Plugin: header `Version:` dan `SEKECO_VERSION` di
-  `wp-content/plugins/sekeco/sekeco.php`.
+- Tema: `Version:` di `wp-content/themes/kabarsembada/style.css`.
+- Plugin: header `Version:` dan `KABARSEMBADA_VERSION` di
+  `wp-content/plugins/kabarsembada/kabarsembada.php`.
 - Naikkan versi setiap perubahan perilaku. Tanpa tag/release.

@@ -1,8 +1,8 @@
 # ---------------------------------------------------------------------------
 # WordPress core is supplied by the Docker image (see compose.yml).
 # Only project code is versioned:
-#   wp-content/themes/sekeco/
-#   wp-content/plugins/sekeco/
+#   wp-content/themes/kabarsembada/, wp-content/plugins/kabarsembada/
+#   wp-content/themes/sekeco/, wp-content/plugins/sekeco/ (reference, removed later)
 # ---------------------------------------------------------------------------
 
 # WordPress core and local config
@@ -15,16 +15,22 @@
 /license.txt
 /readme.html
 
-# Inside wp-content, only the Sekeco theme and plugin are tracked.
+# Inside wp-content, only the project theme and plugin are tracked.
 # Everything else (uploads, upgrades, third-party plugins and themes,
 # WordPress stubs) stays local.
 /wp-content/*
 !/wp-content/themes/
 !/wp-content/plugins/
 /wp-content/themes/*
+!/wp-content/themes/kabarsembada/
 !/wp-content/themes/sekeco/
 /wp-content/plugins/*
+!/wp-content/plugins/kabarsembada/
 !/wp-content/plugins/sekeco/
+
+# Old site database dumps
+*.sql
+*.sql.gz
 
 # Local database volume
 .db/
