@@ -97,16 +97,16 @@ selesai.
       (Fokus + Paling Dibaca), Berita Terkait, Berita Lainnya. View transition
       foto hero → artikel.
 - [x] T2.6 `archive`, `search`, `index`, `page`, `404`.
-- [x] T2.7 Style komentar (daftar, form, paginasi).
+- [x] T2.7 ~~Style komentar~~ — dibatalkan: komentar dimatikan (keputusan 12).
 - [x] T2.8 `DESIGN.md` dari hasil jadi.
 
 ### Fase 3 — QA & bersih-bersih
 
-- [ ] T3.1 Seed dev lokal (kategori theme-1, ±30 post contoh) di DB saja,
-      tidak di-commit.
-- [ ] T3.2 Cek: `bun run lint:js && lint:css && build`, `php -l`, mobile
-      375px, keyboard, `prefers-reduced-motion`, state kosong (tanpa sticky,
-      tanpa views, tanpa komentar).
+- [x] T3.1 Seed dev lokal: 7 kategori, 16 artikel bergambar (dari backup lama),
+      menu "Kanal" — di DB saja, tidak di-commit. Hilang saat migrasi.
+- [ ] T3.2 Cek: lint/build/`php -l` lulus di tiap commit; desktop, 900px, dan
+      375px dicek di browser; keyboard tab & reduced motion dicek. **Sisa:** cek
+      validitas blok di Site Editor (perlu login admin).
 - [ ] T3.3 Hapus `themes/sekeco` + `plugins/sekeco` (commit `chore(repo)`).
 
 ### Fase 4 — Migrasi data (rencana terpisah)
