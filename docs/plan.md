@@ -82,23 +82,23 @@ selesai.
 
 ### Fase 2 — Tema `kabarsembada`
 
-- [ ] T2.1 Kerangka: `style.css` (Version 0.1.0), `theme.json` v3 dengan token
+- [x] T2.1 Kerangka: `style.css` (Version 0.1.0), `theme.json` v3 dengan token
       theme-1 (palet, Manrope lokal, radius, spacing, layout 1200), `functions.php`.
-- [ ] T2.2 Parts: `topbar` (sosial, ticker, tanggal, email redaksi), `header`
+- [x] T2.2 Parts: `topbar` (sosial, ticker, tanggal, email redaksi), `header`
       (logo, Navigation, search, menu mobile), `footer` (4 kolom).
-- [ ] T2.3 Block style + CSS: kartu berita (besar/mini/list), chip, pill
+- [x] T2.3 Block style + CSS: kartu berita (besar/mini/list), chip, pill
       kategori, kotak aksi ("Yang perlu warga lakukan"), carousel scroll-snap.
-- [ ] T2.4 `front-page`: hero + tabs, Sedang Ramai (carousel), Pilihan Redaksi
+- [x] T2.4 `front-page`: hero + tabs, Sedang Ramai (carousel), Pilihan Redaksi
       (sticky + chip), Fokus Berita, Berita Terkini (feed + muat lebih banyak) +
       aside Tag Terpopuler & Terpopuler. Section jadi pattern
       `kabarsembada/home-*`.
-- [ ] T2.5 `single`: progress bar, breadcrumbs, pill, judul, deck (excerpt),
+- [x] T2.5 `single`: progress bar, breadcrumbs, pill, judul, deck (excerpt),
       byline + share, foto utama, prose, tag, author box, komentar, sidebar
       (Fokus + Paling Dibaca), Berita Terkait, Berita Lainnya. View transition
       foto hero → artikel.
-- [ ] T2.6 `archive`, `search`, `index`, `page`, `404`.
-- [ ] T2.7 Style komentar (daftar, form, paginasi).
-- [ ] T2.8 `DESIGN.md` dari hasil jadi.
+- [x] T2.6 `archive`, `search`, `index`, `page`, `404`.
+- [x] T2.7 Style komentar (daftar, form, paginasi).
+- [x] T2.8 `DESIGN.md` dari hasil jadi.
 
 ### Fase 3 — QA & bersih-bersih
 
