@@ -898,7 +898,7 @@ body:not(.page) .ks-nav .wp-block-pages-list__item.current-menu-item > .wp-block
 	grid-template-columns: 1.1fr 1fr;
 	gap: 2rem;
 	align-items: center;
-	overflow: hidden;
+	overflow: clip; /* hidden would let focus scroll the panel sideways */
 	margin-top: var(--wp--preset--spacing--70) !important;
 	padding: clamp(2rem, 5vw, 3.5rem);
 	border-radius: 28px;
@@ -932,38 +932,6 @@ body:not(.page) .ks-nav .wp-block-pages-list__item.current-menu-item > .wp-block
 	color: oklch(30% 0.06 245);
 }
 
-.ks-cta__actions {
-	gap: 0.5rem;
-	justify-content: flex-end;
-}
-
-.ks-cta__actions .wp-block-button__link {
-	padding: 0.8rem 1.5rem;
-	font-weight: 800;
-	transition: background 0.2s, transform 0.2s var(--ks-ease);
-}
-
-.ks-cta__actions .wp-block-button__link:active {
-	transform: scale(0.97);
-}
-
-.ks-cta__primary .wp-block-button__link {
-	background: var(--ks-brand-ink);
-	color: #fff;
-}
-
-.ks-cta__primary .wp-block-button__link:hover {
-	background: oklch(40% 0.13 240);
-}
-
-.ks-cta__secondary .wp-block-button__link {
-	background: #fff;
-	color: var(--ks-ink);
-}
-
-.ks-cta__secondary .wp-block-button__link:hover {
-	background: var(--ks-tint);
-}
 
 /* ---------- Hero row ---------- */
 .ks-hero {
@@ -1381,10 +1349,6 @@ body:not(.page) .ks-nav .wp-block-pages-list__item.current-menu-item > .wp-block
 
 	.is-style-ks-cta {
 		grid-template-columns: 1fr;
-	}
-
-	.ks-cta__actions {
-		justify-content: flex-start;
 	}
 
 	.wp-block-post-template.is-style-ks-rail {
