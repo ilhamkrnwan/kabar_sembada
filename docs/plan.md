@@ -22,7 +22,7 @@ Portal berita regional Sleman (kabarsembada.com) dibangun ulang sebagai tema blo
 | 12 | Komentar | Blok core Comments diberi style theme-1. Buka untuk post, tutup untuk page, moderasi default WP. |
 | 13 | Navigasi | Header kategori = core Navigation dikelola editor. Tanpa link hardcode. |
 | 14 | Bahasa | String UI front-end & editor langsung Bahasa Indonesia, dibungkus `__()`. Tanpa `.po` dulu. |
-| 15 | Import (nanti) | Sumber `C:\KAIRAV\kab44267_wp914.sql.gz` (±4.000 post terbit, tema lama Elementor, Yoast, `wp_post_views`). Permalink `/%postname%/` dipertahankan. Struktur disiapkan sekarang, script import di fase terakhir. |
+| 15 | Import | Lihat `docs/migration-plan.md`. Sumber `C:\KAIRAV\backup_kabarsembada\` (dump SQL + uploads). Permalink `/%postname%/` dipertahankan. |
 
 ## Aturan Gutenberg (warisan Sekeco)
 
@@ -109,15 +109,10 @@ selesai.
       tanpa views, tanpa komentar).
 - [ ] T3.3 Hapus `themes/sekeco` + `plugins/sekeco` (commit `chore(repo)`).
 
-### Fase 4 — Import (nanti, task terpisah)
+### Fase 4 — Migrasi data (rencana terpisah)
 
-- [ ] T4.1 Tambah layanan WP-CLI di `compose.yml`.
-- [ ] T4.2 Script import dari dump lama: users (penulis), kategori/tag (slug
-      lama), post (`post_content` HTML, buang shortcode/markup Elementor),
-      featured image + `wp-content/uploads`, meta Yoast, `wp_post_views` →
-      `kabarsembada_views`, sticky.
-- [ ] T4.3 Komentar lama (opsional).
-- [ ] T4.4 Verifikasi URL lama `/%postname%/` tetap 200, cek sampel post.
+Detail, keputusan, dan task T4.x ada di [`docs/migration-plan.md`](migration-plan.md).
+Metode: SQL mentah dari dump lama ke DB lokal; script di luar repo.
 
 ## Belum diputuskan
 
