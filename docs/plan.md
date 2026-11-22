@@ -54,30 +54,30 @@ selesai.
 
 ### Fase 1 — Plugin `kabarsembada`
 
-- [ ] T1.1 Kerangka: `kabarsembada.php` (header, `KABARSEMBADA_VERSION`
+- [x] T1.1 Kerangka: `kabarsembada.php` (header, `KABARSEMBADA_VERSION`
       0.1.0), loader modul, `package.json` (`@wordpress/scripts`, bun),
       `webpack.config.js`, lint config. Build kosong lulus.
-- [ ] T1.2 Modul `media`: AVIF/WebP (port dari Sekeco).
-- [ ] T1.3 Modul `views`: meta `kabarsembada_views` (`register_post_meta`,
+- [x] T1.2 Modul `media`: AVIF/WebP (port dari Sekeco).
+- [x] T1.3 Modul `views`: meta `kabarsembada_views` (`register_post_meta`,
       `show_in_rest`), endpoint REST ping (rate-limit sederhana per IP/post via
       transient), view script di single.
-- [ ] T1.4 Modul `seo`: meta, OG, Twitter, JSON-LD `NewsArticle` +
+- [x] T1.4 Modul `seo`: meta, OG, Twitter, JSON-LD `NewsArticle` +
       `Organization`. Fallback ke `_yoast_wpseo_metadesc` / `_yoast_wpseo_title`.
       Halaman Settings → Kabar Sembada SEO.
-- [ ] T1.5 Modul `search`: REST `kabarsembada/v1/search` & `suggest` (port, hanya
+- [x] T1.5 Modul `search`: REST `kabarsembada/v1/search` & `suggest` (port, hanya
       post).
-- [ ] T1.6 Modul `motion`: port GSAP runtime + panel Motion.
-- [ ] T1.7 Blok `kabarsembada/ticker` (post terbaru, filter kategori opsional,
+- [x] T1.6 Modul `motion`: port GSAP runtime + panel Motion.
+- [x] T1.7 Blok `kabarsembada/ticker` (post terbaru, filter kategori opsional,
       tombol jeda, `aria-live` off saat jalan).
-- [ ] T1.8 Blok `kabarsembada/post-tabs` (mode: Terbaru/Paling Dibaca, atau
+- [x] T1.8 Blok `kabarsembada/post-tabs` (mode: Terbaru/Paling Dibaca, atau
       daftar tag Fokus; tab aksesibel panah, panel nonaktif `inert`).
-- [ ] T1.9 Blok `kabarsembada/popular` (daftar bernomor; rentang: all-time / 7
+- [x] T1.9 Blok `kabarsembada/popular` (daftar bernomor; rentang: all-time / 7
       hari).
-- [ ] T1.10 Blok `kabarsembada/share` (WA/FB/X/salin link, tanpa skrip pihak
+- [x] T1.10 Blok `kabarsembada/share` (WA/FB/X/salin link, tanpa skrip pihak
       ketiga).
-- [ ] T1.11 Blok `kabarsembada/search` (overlay ala detik: trending, quick
+- [x] T1.11 Blok `kabarsembada/search` (overlay ala detik: trending, quick
       link, pencarian terakhir di localStorage, `/` untuk buka).
-- [ ] T1.12 Query var untuk Query Loop core: urut berdasarkan views & rentang 7
+- [x] T1.12 Query var untuk Query Loop core: urut berdasarkan views & rentang 7
       hari ("Sedang Ramai"), related post per kategori (port `sekecoRelated`).
 
 ### Fase 2 — Tema `kabarsembada`
