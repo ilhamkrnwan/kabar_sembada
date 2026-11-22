@@ -150,47 +150,77 @@ function kabarsembada_get_posts( $args = array() ) {
 }
 
 /**
- * Slugs of the tags most used by posts published in the last N days.
+ * Tags that are hot right now: the tags of the most-read articles published in
+ * the last N days, ranked by the views those articles got. Widens to 30 days,
+ * then to all-time tag counts, when a quiet week has too few.
  *
- * Cached for an hour: counting tags over recent posts is not free on a site
- * with thousands of tags.
+ * Cached for an hour.
  *
  * @param int $number How many tags.
  * @param int $days   Window in days.
- * @return string[]
+ * @return WP_Term[]
  */
-function kabarsembada_recent_top_tags( $number = 4, $days = 30 ) {
-	$key   = 'kabarsembada_top_tags_' . (int) $number . '_' . (int) $days;
-	$slugs = get_transient( $key );
+function kabarsembada_trending_tags( $number = 5, $days = 7 ) {
+	$key  = 'kabarsembada_trending_' . (int) $number . '_' . (int) $days;
+	$ids  = get_transient( $key );
+	$from = static function ( $ids ) {
+		return array_values( array_filter( array_map( static function ( $id ) {
+			$term = get_term( (int) $id, 'post_tag' );
 
-	if ( is_array( $slugs ) ) {
-		return $slugs;
+			return $term instanceof WP_Term ? $term : null;
+		}, (array) $ids ) ) );
+	};
+
+	if ( is_array( $ids ) ) {
+		return $from( $ids );
 	}
 
-	$ids    = get_posts(
-		array(
-			'post_type'           => 'post',
-			'post_status'         => 'publish',
-			'posts_per_page'      => 300,
-			'fields'              => 'ids',
-			'ignore_sticky_posts' => true,
-			'no_found_rows'       => true,
-			'date_query'          => array( array( 'after' => absint( $days ) . ' days ago' ) ),
-		)
-	);
-	$counts = array();
+	$score = array();
 
-	foreach ( $ids ? wp_get_object_terms( $ids, 'post_tag', array( 'fields' => 'all_with_object_id' ) ) : array() as $term ) {
-		$counts[ $term->slug ] = isset( $counts[ $term->slug ] ) ? $counts[ $term->slug ] + 1 : 1;
+	foreach ( array( $days, 30 ) as $window ) {
+		$posts = get_posts(
+			kabarsembada_order_by_views(
+				array(
+					'post_type'           => 'post',
+					'post_status'         => 'publish',
+					'posts_per_page'      => 60,
+					'fields'              => 'ids',
+					'ignore_sticky_posts' => true,
+					'no_found_rows'       => true,
+					'date_query'          => array( array( 'after' => absint( $window ) . ' days ago' ) ),
+				)
+			)
+		);
+
+		foreach ( $posts ? wp_get_object_terms( $posts, 'post_tag', array( 'fields' => 'all_with_object_id' ) ) : array() as $term ) {
+			// +1 so a brand-new article with no views yet still counts.
+			$score[ $term->term_id ] = ( isset( $score[ $term->term_id ] ) ? $score[ $term->term_id ] : 0 ) + kabarsembada_get_views( $term->object_id ) + 1;
+		}
+
+		if ( count( $score ) >= $number ) {
+			break;
+		}
 	}
 
-	arsort( $counts );
-	// Topics need more than one article to be worth a tab.
-	$slugs = array_slice( array_keys( array_filter( $counts, static function ( $count ) {
-		return $count > 1;
-	} ) ), 0, $number );
+	arsort( $score );
+	$ids = array_slice( array_keys( $score ), 0, $number );
 
-	set_transient( $key, $slugs, HOUR_IN_SECONDS );
+	if ( count( $ids ) < $number ) {
+		$more = get_terms(
+			array(
+				'taxonomy'   => 'post_tag',
+				'orderby'    => 'count',
+				'order'      => 'DESC',
+				'number'     => $number,
+				'hide_empty' => true,
+				'exclude'    => $ids,
+				'fields'     => 'ids',
+			)
+		);
+		$ids  = array_slice( array_merge( $ids, is_wp_error( $more ) ? array() : $more ), 0, $number );
+	}
 
-	return $slugs;
+	set_transient( $key, $ids, HOUR_IN_SECONDS );
+
+	return $from( $ids );
 }

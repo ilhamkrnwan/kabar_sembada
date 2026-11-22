@@ -23,7 +23,7 @@ registerBlockType( metadata.name, {
 					<RangeControl
 						__next40pxDefaultSize
 						__nextHasNoMarginBottom
-						label={ __( 'Topik populer (tag)', 'kabarsembada' ) }
+						label={ __( 'Topik ramai (tag)', 'kabarsembada' ) }
 						value={ attributes.topics }
 						min={ 0 }
 						max={ 10 }

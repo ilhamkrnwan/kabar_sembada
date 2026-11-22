@@ -5,6 +5,10 @@
 const dlg = document.querySelector( '.ks-search' );
 
 if ( dlg ) {
+	// The block sits inside layout containers (flex groups reset child
+	// margins); a dialog belongs at the top of the page.
+	document.body.append( dlg );
+
 	const KEY = 'ks-recent';
 	const t = JSON.parse( dlg.dataset.i18n || '{}' );
 	const $ = ( selector ) => dlg.querySelector( selector );

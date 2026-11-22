@@ -5,7 +5,7 @@
  * - latest: two tabs, "Berita Terbaru" and "Paling Dibaca", compact cards.
  * - topics: one chip tab per chosen tag; each panel has a lead card, a short
  *   list and a link to the tag archive (Fokus Berita). Without chosen tags it
- *   uses the tags most used in the last 30 days.
+ *   uses the week's trending tags.
  *
  * Tabs with no posts are left out; with none left the block prints nothing.
  *
@@ -37,9 +37,9 @@ if ( 'latest' === $ks_mode ) {
 } else {
 	$ks_slugs = array_filter( (array) $attributes['tags'] );
 
-	// No topics picked yet: use the tags most used in the last 30 days.
+	// No topics picked yet: use what is trending this week.
 	if ( ! $ks_slugs ) {
-		$ks_slugs = kabarsembada_recent_top_tags( 4 );
+		$ks_slugs = wp_list_pluck( kabarsembada_trending_tags( 4 ), 'slug' );
 	}
 
 	foreach ( $ks_slugs as $ks_slug ) {

@@ -35,15 +35,7 @@ if ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) || ! kabarsembada_once( 'sear
 	return;
 }
 
-$ks_topics   = $attributes['topics'] > 0 ? get_terms(
-	array(
-		'taxonomy'   => 'post_tag',
-		'orderby'    => 'count',
-		'order'      => 'DESC',
-		'number'     => (int) $attributes['topics'],
-		'hide_empty' => true,
-	)
-) : array();
+$ks_topics   = $attributes['topics'] > 0 ? kabarsembada_trending_tags( (int) $attributes['topics'] ) : array();
 $ks_channels = $attributes['channels'] > 0 ? get_terms(
 	array(
 		'taxonomy'   => 'category',
@@ -53,7 +45,6 @@ $ks_channels = $attributes['channels'] > 0 ? get_terms(
 		'hide_empty' => true,
 	)
 ) : array();
-$ks_topics   = is_wp_error( $ks_topics ) ? array() : $ks_topics;
 $ks_channels = is_wp_error( $ks_channels ) ? array() : $ks_channels;
 $ks_i18n     = array(
 	/* translators: %d: number of results. */
@@ -86,7 +77,7 @@ $ks_i18n     = array(
 			<div class="ks-search__idle">
 				<?php if ( $ks_topics ) : ?>
 					<section>
-						<h2><?php esc_html_e( 'Topik populer', 'kabarsembada' ); ?></h2>
+						<h2><?php esc_html_e( 'Sedang ramai minggu ini', 'kabarsembada' ); ?></h2>
 						<ol class="ks-search__trend">
 							<?php foreach ( $ks_topics as $ks_i => $ks_term ) : ?>
 								<li><button type="button" data-q="<?php echo esc_attr( $ks_term->name ); ?>"><b>#<?php echo (int) $ks_i + 1; ?></b> <?php echo esc_html( $ks_term->name ); ?><?php echo $ks_i < 3 ? '<span class="ks-search__up">' . $ks_icon( 'trend' ) . '</span>' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button></li>
