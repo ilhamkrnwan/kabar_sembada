@@ -1,6 +1,6 @@
 {
 	"name": "kabarsembada",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "News blocks, views, SEO, search and motion for the Kabar Sembada theme.",
 	"private": true,
 	"license": "GPL-2.0-or-later",
@@ -24,8 +24,10 @@
 		"@wordpress/compose": "^9.1.0",
 		"@wordpress/core-data": "^9.1.0",
 		"@wordpress/data": "^11.1.0",
+		"@wordpress/editor": "^16.1.0",
 		"@wordpress/hooks": "^5.1.0",
 		"@wordpress/i18n": "^7.1.0",
+		"@wordpress/plugins": "^8.1.0",
 		"@wordpress/scripts": "^37.1.0",
 		"@wordpress/server-side-render": "^7.1.0",
 		"gsap": "^3.15.1"

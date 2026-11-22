@@ -56,16 +56,17 @@ function kabarsembada_has_thumbnail( $post ) {
 /**
  * First category of a post, or null.
  *
- * Prefers the Yoast primary category when the old site set one.
+ * Prefers the primary category set in the SEO panel, as long as the post is
+ * still in that category.
  *
  * @param WP_Post|int $post Post object or ID.
  * @return WP_Term|null
  */
 function kabarsembada_primary_category( $post ) {
 	$post    = get_post( $post );
-	$primary = (int) get_post_meta( $post->ID, '_yoast_wpseo_primary_category', true );
+	$primary = (int) get_post_meta( $post->ID, KABARSEMBADA_PRIMARY_CATEGORY_KEY, true );
 
-	if ( $primary ) {
+	if ( $primary && has_term( $primary, 'category', $post ) ) {
 		$term = get_term( $primary, 'category' );
 
 		if ( $term instanceof WP_Term ) {

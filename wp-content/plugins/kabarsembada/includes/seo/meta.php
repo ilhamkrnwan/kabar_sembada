@@ -3,72 +3,13 @@
  * Meta description and Open Graph / Twitter card tags.
  *
  * Core already prints the canonical link, robots directives and the document
- * title. Posts imported from the old site keep their Yoast title and
- * description: they are read from the Yoast meta keys when present, so Yoast
- * itself does not need to be installed.
+ * title. Editors set a per-post description in the SEO panel
+ * (kabarsembada_seo_description, see seo/fields.php).
  *
  * @package KabarSembada
  */
 
 defined( 'ABSPATH' ) || exit;
-
-/**
- * Yoast SEO title of a post with its common variables expanded, or ''.
- *
- * Titles still holding an unknown %%variable%% are dropped rather than shown raw.
- *
- * @param WP_Post $post Post object.
- * @return string
- */
-function kabarsembada_seo_yoast_title( $post ) {
-	$title = trim( (string) get_post_meta( $post->ID, '_yoast_wpseo_title', true ) );
-
-	if ( '' === $title ) {
-		return '';
-	}
-
-	$cat   = kabarsembada_primary_category( $post );
-	$title = strtr(
-		$title,
-		array(
-			'%%title%%'            => get_the_title( $post ),
-			'%%sitename%%'         => get_bloginfo( 'name' ),
-			'%%sep%%'              => '-',
-			'%%page%%'             => '',
-			'%%primary_category%%' => $cat ? $cat->name : '',
-			'%%category%%'         => $cat ? $cat->name : '',
-		)
-	);
-
-	if ( false !== strpos( $title, '%%' ) ) {
-		return '';
-	}
-
-	return trim( preg_replace( '/\s+/', ' ', wp_strip_all_tags( $title ) ) );
-}
-
-/**
- * Use the imported Yoast title as the document title.
- *
- * @param string $title Title from earlier filters ('' = let core build it).
- * @return string
- */
-function kabarsembada_seo_document_title( $title ) {
-	if ( is_singular() ) {
-		$post = get_queried_object();
-
-		if ( $post instanceof WP_Post ) {
-			$yoast = kabarsembada_seo_yoast_title( $post );
-
-			if ( '' !== $yoast ) {
-				return $yoast;
-			}
-		}
-	}
-
-	return $title;
-}
-add_filter( 'pre_get_document_title', 'kabarsembada_seo_document_title' );
 
 /**
  * Canonical-style URL of the current request, without the pagination suffix.
@@ -106,8 +47,8 @@ function kabarsembada_seo_current_url() {
 }
 
 /**
- * Short plain-text description for a post: Yoast description, excerpt, then
- * the start of the content.
+ * Short plain-text description for a post: the SEO panel description, the
+ * excerpt, then the start of the content.
  *
  * @param WP_Post $post Post object.
  * @return string Empty string when nothing usable exists.
@@ -117,9 +58,9 @@ function kabarsembada_seo_post_description( $post ) {
 		return '';
 	}
 
-	$text = trim( (string) get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true ) );
+	$text = trim( (string) get_post_meta( $post->ID, KABARSEMBADA_SEO_DESCRIPTION_KEY, true ) );
 
-	if ( '' === $text || false !== strpos( $text, '%%' ) ) {
+	if ( '' === $text ) {
 		$text = has_excerpt( $post )
 			? $post->post_excerpt
 			: wp_strip_all_tags( strip_shortcodes( excerpt_remove_blocks( $post->post_content ) ) );
@@ -198,8 +139,7 @@ function kabarsembada_seo_context() {
 	$desc    = '';
 
 	if ( is_singular() && $object instanceof WP_Post ) {
-		$yoast = kabarsembada_seo_yoast_title( $object );
-		$title = '' !== $yoast ? $yoast : wp_strip_all_tags( get_the_title( $object ) );
+		$title = wp_strip_all_tags( get_the_title( $object ) );
 		$desc  = kabarsembada_seo_post_description( $object );
 		$type  = 'post' === $object->post_type ? 'article' : 'website';
 	} elseif ( is_category() || is_tag() || is_tax() ) {

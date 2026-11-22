@@ -3,3 +3,4 @@
  */
 import './motion/editor';
 import './query/variations';
+import './seo/panel';

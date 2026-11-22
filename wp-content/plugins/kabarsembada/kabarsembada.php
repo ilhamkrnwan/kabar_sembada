@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Kabar Sembada
  * Description:       Blok berita, penghitung views, SEO, pencarian, dan motion untuk tema Kabar Sembada.
- * Version:           0.1.0
+ * Version:           0.2.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            Kabar Sembada
@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'KABARSEMBADA_VERSION', '0.1.0' );
+define( 'KABARSEMBADA_VERSION', '0.2.0' );
 define( 'KABARSEMBADA_FILE', __FILE__ );
 define( 'KABARSEMBADA_PATH', plugin_dir_path( __FILE__ ) );
 define( 'KABARSEMBADA_URL', plugin_dir_url( __FILE__ ) );
@@ -35,9 +35,11 @@ function kabarsembada_load_modules() {
 			'query.php',
 			'search.php',
 			'seo/settings.php',
+			'seo/fields.php',
 			'seo/meta.php',
 			'seo/schema.php',
 			'motion.php',
+			'redirects.php',
 			'blocks.php',
 		)
 	);
