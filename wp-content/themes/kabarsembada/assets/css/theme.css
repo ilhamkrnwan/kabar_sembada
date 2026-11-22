@@ -169,6 +169,13 @@ body:not(.editor-styles-wrapper) .ks-section:not(:has(.wp-block-post, .ks-tabs, 
 	color: var(--ks-on-brand);
 }
 
+/* Core's Page List (the fallback menu) marks a page "current" when its ID
+   equals the queried term's ID. Only trust that mark on actual pages. */
+body:not(.page) .ks-nav .wp-block-pages-list__item.current-menu-item > .wp-block-navigation-item__content {
+	background: none;
+	color: var(--ks-ink-2);
+}
+
 /* Between the mobile overlay (core, < 600px) and the full bar, let a long
    menu scroll sideways instead of wrapping. */
 @media (min-width: 600px) and (max-width: 1080px) {
@@ -363,13 +370,19 @@ body:not(.editor-styles-wrapper) .ks-section:not(:has(.wp-block-post, .ks-tabs, 
 	gap: 2rem !important;
 }
 
-.ks-sticky > * {
-	position: sticky;
-	top: calc(var(--wp--custom--header-height, 76px) + 20px);
-}
+/* The whole aside sticks as one block, so its boxes never slide under each
+   other. Only when it fits the screen; a taller aside scrolls normally. */
+@media (min-width: 901px) and (min-height: 900px) {
 
-.ks-sticky > * + * {
-	position: static;
+	.ks-sticky {
+		position: sticky;
+		top: calc(var(--wp--custom--header-height, 76px) + 20px);
+		align-self: flex-start;
+	}
+
+	.admin-bar .ks-sticky {
+		top: calc(var(--wp--custom--header-height, 76px) + 52px);
+	}
 }
 
 /* ---------- Cards (Query Loop styles) ----------
@@ -1174,9 +1187,6 @@ body:not(.editor-styles-wrapper) .ks-section:not(:has(.wp-block-post, .ks-tabs, 
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 
-	.ks-sticky > * {
-		position: static;
-	}
 }
 
 @media (max-width: 782px) {
