@@ -16,7 +16,7 @@
 <div class="wp-block-columns alignwide ks-hero"><!-- wp:column {"width":"66.66%"} -->
 <div class="wp-block-column" style="flex-basis:66.66%"><!-- wp:query {"queryId":11,"query":{"perPage":1,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"ignore","inherit":false}} -->
 <div class="wp-block-query"><!-- wp:post-template {"className":"is-style-ks-hero"} -->
-<!-- wp:post-featured-image {"isLink":true,"sizeSlug":"large"} /-->
+<!-- wp:post-featured-image {"isLink":true,"sizeSlug":"large","className":"ks-priority"} /-->
 
 <!-- wp:group {"className":"ks-hero__body","layout":{"type":"default"}} -->
 <div class="wp-block-group ks-hero__body"><!-- wp:group {"className":"ks-meta","layout":{"type":"flex","flexWrap":"wrap"}} -->

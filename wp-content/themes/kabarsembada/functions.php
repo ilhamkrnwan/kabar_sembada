@@ -119,6 +119,56 @@ function kabarsembada_manual_deck_only( $block_content, $block, $instance ) {
 add_filter( 'render_block_core/post-excerpt', 'kabarsembada_manual_deck_only', 10, 3 );
 
 /**
+ * A paragraph with the class ks-today always shows today's date, whatever text
+ * it was saved with, so the top bar never goes stale.
+ *
+ * @param string $block_content Rendered paragraph.
+ * @param array  $block         Parsed block.
+ * @return string
+ */
+function kabarsembada_today_paragraph( $block_content, $block ) {
+	$class = isset( $block['attrs']['className'] ) ? (string) $block['attrs']['className'] : '';
+
+	if ( false === strpos( $class, 'ks-today' ) ) {
+		return $block_content;
+	}
+
+	return (string) preg_replace(
+		'#(<p\b[^>]*>).*?(</p>)#s',
+		'$1<time datetime="' . esc_attr( wp_date( 'Y-m-d' ) ) . '">' . esc_html( wp_date( 'j M Y' ) ) . '</time>$2',
+		$block_content,
+		1
+	);
+}
+add_filter( 'render_block_core/paragraph', 'kabarsembada_today_paragraph', 10, 2 );
+
+/**
+ * Above-the-fold photos (class ks-priority: the home hero, the article's main
+ * photo) load eagerly with high priority instead of lazily.
+ *
+ * @param string $block_content Rendered featured image.
+ * @param array  $block         Parsed block.
+ * @return string
+ */
+function kabarsembada_priority_image( $block_content, $block ) {
+	$class = isset( $block['attrs']['className'] ) ? (string) $block['attrs']['className'] : '';
+
+	if ( false === strpos( $class, 'ks-priority' ) ) {
+		return $block_content;
+	}
+
+	$processor = new WP_HTML_Tag_Processor( $block_content );
+
+	if ( $processor->next_tag( 'img' ) ) {
+		$processor->remove_attribute( 'loading' );
+		$processor->set_attribute( 'fetchpriority', 'high' );
+	}
+
+	return $processor->get_updated_html();
+}
+add_filter( 'render_block_core/post-featured-image', 'kabarsembada_priority_image', 10, 2 );
+
+/**
  * Show one category on cards: the primary one when the post has several.
  *
  * Only for post-terms blocks inside a .ks-meta group (cards); the article
