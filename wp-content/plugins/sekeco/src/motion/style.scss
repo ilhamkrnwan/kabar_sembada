@@ -1,0 +1,164 @@
+/**
+ * Frontend motion styles.
+ */
+
+.sekeco-motion {
+	--sekeco-motion-x: 0px;
+	--sekeco-motion-y: 0px;
+	--sekeco-motion-scale: 1;
+}
+
+.sekeco-motion--fade-up {
+	--sekeco-motion-y: 24px;
+}
+
+.sekeco-motion--fade-down {
+	--sekeco-motion-y: -24px;
+}
+
+.sekeco-motion--slide-left {
+	--sekeco-motion-x: 36px;
+}
+
+.sekeco-motion--slide-right {
+	--sekeco-motion-x: -36px;
+}
+
+.sekeco-motion--zoom {
+	--sekeco-motion-scale: 0.94;
+}
+
+.sekeco-motion--js {
+	transition-property: opacity, transform;
+	transition-duration: var(--sekeco-motion-duration, 700ms);
+	transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+	transition-delay: var(--sekeco-motion-delay, 0ms);
+	will-change: opacity, transform;
+}
+
+.sekeco-motion--js:not(.is-visible) {
+	opacity: 0;
+	transform:
+		translate3d(var(--sekeco-motion-x), var(--sekeco-motion-y), 0)
+		scale(var(--sekeco-motion-scale));
+}
+
+.sekeco-motion--js.is-visible {
+	opacity: 1;
+	transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+	.sekeco-motion--js {
+		opacity: 1 !important;
+		transform: none !important;
+		transition: none !important;
+	}
+}
+
+// Pre-reveal states for the GSAP runtime. They exist only while the runtime is
+// expected (html.sekeco-js) and are released by .sekeco-ready, or after 3s by
+// the failsafe animation if the script never starts.
+@media (prefers-reduced-motion: no-preference) {
+
+	html.sekeco-js:not(.sekeco-ready) {
+
+		.sk-hero__title {
+			visibility: hidden;
+			animation: sk-failsafe-visible 0.01s 3s forwards;
+		}
+
+		.sk-section-header,
+		.sk-capability,
+		.sk-process-step,
+		.sk-stat,
+		.sk-faq-item,
+		.sk-projects--grid .sk-projects__item,
+		.sk-projects--list .sk-row,
+		.sk-marquee,
+		.sk-cta__inner > *,
+		.sk-statement .sk-link {
+			opacity: 0;
+			transform: translateY(32px);
+			animation: sk-failsafe-show 0.01s 3s forwards;
+		}
+	}
+}
+
+@keyframes sk-failsafe-visible {
+
+	to {
+		visibility: visible;
+	}
+}
+
+@keyframes sk-failsafe-show {
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+// Theme switch (Sunrise, see theme-switch.js): the new page is clipped to a
+// huge circle whose top edge is the horizon; GSAP lifts --sk-h from below the
+// screen to above it. The glow is its own transition group on the same edge.
+// The hold animation keeps the transition alive while the tween runs.
+@keyframes sk-theme-hold {
+
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+.sk-dawn {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: calc(var(--sk-sag, 0px) + 140px);
+	--sk-in: calc(var(--sk-r, 1000px) - 4px);
+	--sk-edge: var(--sk-r, 1000px);
+	--sk-mid: calc(var(--sk-r, 1000px) + 22px);
+	--sk-out: calc(var(--sk-r, 1000px) + 120px);
+	background: radial-gradient(circle at 50% calc(120px + var(--sk-edge)), transparent var(--sk-in), var(--sk-rim, transparent) var(--sk-edge), var(--sk-glow, transparent) var(--sk-mid), transparent var(--sk-out));
+	pointer-events: none;
+	view-transition-name: sk-dawn;
+}
+
+html.sk-theme-switch {
+
+	&::view-transition-old(root),
+	&::view-transition-new(root) {
+		animation: sk-theme-hold calc(var(--sk-dur, 1.5s) + 0.15s) linear both;
+		mix-blend-mode: normal;
+	}
+
+	&::view-transition-old(root) {
+		z-index: 1;
+	}
+
+	&::view-transition-new(root) {
+		z-index: 2;
+		clip-path: circle(var(--sk-r, 1000px) at 50% calc(var(--sk-h, 100vh) + var(--sk-r, 1000px)));
+	}
+
+	&::view-transition-group(sk-dawn) {
+		animation: none;
+		transform: translateY(calc(var(--sk-h, 100vh) - 120px));
+	}
+
+	&::view-transition-old(sk-dawn) {
+		display: none;
+	}
+
+	&::view-transition-new(sk-dawn) {
+		animation: none;
+	}
+}

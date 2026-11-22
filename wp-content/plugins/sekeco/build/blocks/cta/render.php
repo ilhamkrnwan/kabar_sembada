@@ -1,0 +1,48 @@
+<?php
+/**
+ * Server render for the Sekeco CTA block.
+ *
+ * @package Sekeco
+ *
+ * @var array    $attributes Block attributes.
+ * @var string   $content    Serialized inner blocks (actions).
+ * @var WP_Block $block      Block instance.
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$kicker  = isset( $attributes['kicker'] ) ? wp_strip_all_tags( $attributes['kicker'] ) : '';
+$heading = isset( $attributes['heading'] ) ? sekeco_kses_inline( $attributes['heading'] ) : '';
+$lead    = isset( $attributes['lead'] ) ? wp_strip_all_tags( $attributes['lead'] ) : '';
+$tone    = isset( $attributes['tone'] ) ? $attributes['tone'] : 'accent';
+$tone    = in_array( $tone, array( 'auto', 'ink', 'paper', 'accent' ), true ) ? $tone : 'accent';
+
+if ( '' === $heading ) {
+	return;
+}
+
+list( $bg_class, $bg_canvas ) = sekeco_background( $attributes );
+
+$level   = isset( $attributes['level'] ) ? max( 1, min( 4, (int) $attributes['level'] ) ) : 2;
+$classes = 'sk-cta' . ( 'auto' === $tone ? '' : ' sk-tone--' . $tone ) . sekeco_width_class( $attributes ) . $bg_class;
+
+$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => $classes ) );
+?>
+<section <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+	<?php echo $bg_canvas; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+	<span class="sk-beam" aria-hidden="true"><span class="sk-beam__dot"></span></span>
+	<div class="sk-cta__inner">
+		<div class="sk-cta__copy">
+			<?php if ( '' !== $kicker ) : ?>
+				<p class="sk-kicker sk-cta__kicker"><?php echo esc_html( $kicker ); ?></p>
+			<?php endif; ?>
+			<h<?php echo (int) $level; ?> class="sk-cta__title"><?php echo $heading; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h<?php echo (int) $level; ?>>
+			<?php if ( '' !== $lead ) : ?>
+				<p class="sk-cta__lead"><?php echo esc_html( $lead ); ?></p>
+			<?php endif; ?>
+		</div>
+		<?php if ( '' !== trim( $content ) ) : ?>
+			<div class="sk-cta__actions"><?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+		<?php endif; ?>
+	</div>
+</section>

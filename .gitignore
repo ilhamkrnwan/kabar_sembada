@@ -1,0 +1,45 @@
+# ---------------------------------------------------------------------------
+# WordPress core is supplied by the Docker image (see compose.yml).
+# Only project code is versioned:
+#   wp-content/themes/sekeco/
+#   wp-content/plugins/sekeco/
+# ---------------------------------------------------------------------------
+
+# WordPress core and local config
+/wp-admin/
+/wp-includes/
+/wp-*.php
+/wp-config.php
+/index.php
+/xmlrpc.php
+/license.txt
+/readme.html
+
+# Inside wp-content, only the Sekeco theme and plugin are tracked.
+# Everything else (uploads, upgrades, third-party plugins and themes,
+# WordPress stubs) stays local.
+/wp-content/*
+!/wp-content/themes/
+!/wp-content/plugins/
+/wp-content/themes/*
+!/wp-content/themes/sekeco/
+/wp-content/plugins/*
+!/wp-content/plugins/sekeco/
+
+# Local database volume
+.db/
+
+# Dependencies and build tooling
+node_modules/
+vendor/
+
+# Agent tooling (project rules live in AGENTS.md)
+.agents
+.claude
+CLAUDE.md
+skills-lock.json
+
+# OS and logs
+.DS_Store
+Thumbs.db
+*.log
