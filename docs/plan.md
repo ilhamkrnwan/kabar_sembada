@@ -48,7 +48,7 @@ selesai.
 - [x] T0.2 `docs/plan.md` (dokumen ini).
 - [x] T0.3 Tulis ulang `AGENTS.md` untuk Kabar Sembada (path versi baru, scope
       commit sama, cek pre-commit untuk `plugins/kabarsembada/src/`).
-- [ ] T0.4 Tulis ulang `README.md` dan `PRODUCT.md` (produk, audiens Sleman,
+- [x] T0.4 Tulis ulang `README.md` dan `PRODUCT.md` (produk, audiens Sleman,
       prinsip). `DESIGN.md` ditulis setelah tema jadi (T2.x), diturunkan dari
       hasil, bukan niat.
 

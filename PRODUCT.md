@@ -6,52 +6,55 @@
 
 web
 
+## Stack
+
+WordPress block theme (`theme.json` v3) + companion plugin. The plugin owns the
+custom blocks (`kabarsembada/*`), post views, SEO, search REST and the GSAP
+motion layer. Build with `@wordpress/scripts` via Bun. Local dev on Docker
+(`compose.yml`).
+
 ## Users
 
-Decision makers who need a digital partner: small and mid-size businesses and institutions in Indonesia (schools, foundations, plantations, retail, recruitment) and startups or product teams abroad. They arrive to judge whether Sekeco can take a brand or an operational system from idea to something running, and to start a conversation. Audience is mixed local and international; all site copy is English.
+Residents of Kabupaten Sleman (DIY) and people who work, study, or travel
+there, reading on phone first: what the regency government decided, what
+affects their kapanewon today (roads, weather, Merapi, prices, school
+admission, public services), then one full story.
 
 ## Product Purpose
 
-Sekeco is an eclectic digital agency. The website presents its services, shows its works and products, introduces the team, and converts visitors into project enquiries through a built-in form. Success is a qualified enquiry submitted through the Sekeco form.
+Production site for "Kabar Sembada" (kabarsembada.com), rebuilt from the old
+Elementor site. Design follows theme-1 of the prototype at
+`C:\KAIRAV\portal_project\theme-1` ("Suprast" news layout).
 
 ## Positioning
 
-A small permanent core plus a network of hand-picked specialists, pulled in per project, covering the whole path from brand identity to a working system. One team holds brand, design, and engineering, so there is no hand-off between vendors, and the team still scales to the size of the job.
-
-## Operating Context
-
-Content is edited by non-developers in the WordPress block editor and Site Editor. Menus are managed through the core Navigation block; forms are built with the Sekeco form builder and stored as submissions. The site runs on WordPress with a Docker local stack; production has no Bun, so the plugin `build/` directory is committed.
+Local first: news and service information about Sleman's 17 kapanewon and 86
+kalurahan, mixing reporting (pemerintahan, peristiwa, ekonomi, pendidikan,
+kesehatan, wisata) with practical daily info.
 
 ## Capabilities and Constraints
 
-- Services presented as primary capabilities: web and e-commerce, mobile apps (iOS and Android), ERP and business systems (including API integration), identity and UI/UX design.
-- Content types: `portfolio` (admin label Works, `/works/`), `product` (admin label Portfolio, `/portfolio/`), `team` (`/team/`), all sharing core `category`. See CLAUDE.md for the naming trap.
-- Theme is a pure block theme (theme.json v3); the Sekeco plugin owns custom blocks, CPTs, meta, block bindings, forms, and motion.
-- Every UI string is English. Chat and docs with the owner are Indonesian.
-- No testimonials, client quotes, or numeric claims are authored. Numbers come from real content (the Stat block counts published Works, Portfolio, and Team posts).
-- Icons: Solar Line Duotone only, via the icon pipeline.
+- Every component is a block an editor can change in place.
+- Editorial curation uses native WordPress: sticky posts (Pilihan Redaksi),
+  tags (Fokus Berita), categories (nav, chips).
+- Most-read lists come from the plugin's own views counter.
+- Comments use core blocks, open on posts, closed on pages.
+- Honest content: empty states hide themselves; no fake UI (no newsletter until
+  a provider exists).
+- Old URLs (`/%postname%/`) must keep working after the import.
 
 ## Brand Commitments
 
-- Name: Sekeco (lowercase wordmark acceptable).
-- The owner wants the site to look and read brand new. The previous site (sekeco.github.io) is an anti-reference for look and copy; do not reuse its text, numbers, or testimonials.
-- Brand colour is the logo's gradient: blue `#4D68E4`, purple `#A33FBD`, red-pink `#FD065A` with a cyan `#09C4F7` glint (from the ring mark, saved as `assets/images/sekeco-mark.svg`). The site should feel modern, techy and AI-capable, with cards that respond to the pointer (a soft spotlight, glare, tilt) taken from React Bits and Magic UI rather than a coloured neon glow, while keeping the layout and structure consistent.
-- Headings are set in Bricolage Grotesque.
-- Reference for the design system (not to be copied wholesale): Ohio Theme demo 8, https://ohio.clbthemes.com/demo8/homedemo8-elementor/. Binding traits to carry: modern, warm dark and light modes with a visible switcher, rounded cards, large type-led sections, project cards with overlaid titles, GSAP-driven motion and parallax, light transitions.
-
-## Evidence on Hand
-
-- Real works and products exist as posts in the local database; their featured images and meta are the proof. None of their content may be fabricated or imported from the old site unless the owner adds it as content.
-- Absences future work must not fabricate: client logos, testimonials, awards, project metrics.
+- Name: Kabar Sembada.
+- Brand color: `oklch(74.7% 0.1517 235.8)` (sky blue). Text on it is dark navy;
+  links on white use a darker shade of the same hue.
+- Font: Manrope 500–800.
+- Language: Bahasa Indonesia for all UI strings.
 
 ## Product Principles
 
-1. The work is the proof: surface real Works and Portfolio posts before any claim.
-2. One team, whole path: every section reinforces identity-to-system coverage rather than listing disconnected services.
-3. Editable by design: every component is a block an editor can change in place; nothing important lives only in a pattern's raw markup.
-4. Honest content: empty states hide themselves; no placeholder numbers or quotes ship.
-5. Fast to enquire: a contact path is never more than one click away.
-
-## Accessibility & Inclusion
-
-WCAG 2.2 AA contrast in both light and dark modes, visible focus, full keyboard operation of the menu, theme toggle and filters, and `prefers-reduced-motion` honored by all motion. Mixed Indonesian and international audience, so avoid idioms and keep sentences plain.
+1. Today's local info is readable at a glance.
+2. Search finds a story in two keystrokes.
+3. The article page is built for reading: comfortable measure, clear hierarchy.
+4. Fast on a mid-range phone: CSS first, GSAP only where it adds meaning, and
+   always respects `prefers-reduced-motion`.
