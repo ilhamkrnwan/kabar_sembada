@@ -18,7 +18,7 @@ Portal berita regional Sleman (kabarsembada.com) dibangun ulang sebagai tema blo
 | 8 | Plugin | Bawa & rampingkan dari Sekeco: loader modul, SEO (meta/OG/JSON-LD `NewsArticle`), REST search/suggest, AVIF/WebP, motion, tooling build. Buang: CPT portfolio/product/team, form builder, redirects, toc, theme-toggle, blok marketing. |
 | 9 | Views | Meta `kabarsembada_views`, naik lewat REST ping dari single (aman dengan cache LiteSpeed). Paling Dibaca = all-time; Sedang Ramai = views tertinggi artikel 7 hari terakhir. |
 | 10 | Kurasi | Pilihan Redaksi = post sticky + chip kategori. Fokus Berita = tag dipilih di atribut `post-tabs`. Ticker = post terbaru (opsional filter kategori). Tanpa meta tambahan. |
-| 11 | Newsletter | Tidak ada sampai ada provider (aturan: tanpa UI palsu). |
+| 11 | Newsletter | Form surel di panel CTA (blok `kabarsembada/subscribe`). Alamat disimpan di WordPress (menu Pelanggan, ekspor CSV), belum dikirim. Opt-in ganda + layanan pengirim ditambah sebelum kiriman pertama. Data pelanggan ikut terhapus bila migrasi dijalankan ulang. |
 | 12 | Komentar | Blok core Comments diberi style theme-1. Buka untuk post, tutup untuk page, moderasi default WP. |
 | 13 | Navigasi | Header kategori = core Navigation dikelola editor. Tanpa link hardcode. |
 | 14 | Bahasa | String UI front-end & editor langsung Bahasa Indonesia, dibungkus `__()`. Tanpa `.po` dulu. |
@@ -116,6 +116,6 @@ Metode: SQL mentah dari dump lama ke DB lokal; script di luar repo.
 
 ## Belum diputuskan
 
-- Provider newsletter (keputusan 11).
+- Layanan pengirim newsletter (keputusan 11).
 - Dark mode (keputusan 5).
 - Tujuh kategori nav final — tunggu import.
