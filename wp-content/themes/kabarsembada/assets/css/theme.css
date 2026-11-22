@@ -536,7 +536,7 @@ body:not(.page) .ks-nav .wp-block-pages-list__item.current-menu-item > .wp-block
 		background-size 0.6s var(--ks-ease);
 }
 
-.wp-block-post-template[class*="is-style-ks-"]:not(.is-style-ks-hero) .wp-block-post:hover .wp-block-post-title a {
+.wp-block-post-template[class*="is-style-ks-"]:not(.is-style-ks-hero, .is-style-ks-overlay, .is-style-ks-bento-alt) .wp-block-post:hover .wp-block-post-title a {
 	color: var(--ks-brand-ink);
 }
 
@@ -822,6 +822,363 @@ body:not(.page) .ks-nav .wp-block-pages-list__item.current-menu-item > .wp-block
 	-webkit-box-orient: vertical;
 }
 
+/* ---------- Card variants (patterns/cards-*.php) ----------
+ * Each expects the pattern's card markup: featured image + .ks-card__body
+ * (meta, title, excerpt). Excerpts show only where a variant needs them. */
+.is-style-ks-grid-4 .wp-block-post-excerpt,
+.is-style-ks-bento > .wp-block-post:not(:first-child) .wp-block-post-excerpt,
+.is-style-ks-spotlight > .wp-block-post:not(:first-child) .wp-block-post-excerpt,
+.is-style-ks-headlines .wp-block-post-excerpt,
+.is-style-ks-overlay .wp-block-post-excerpt,
+.is-style-ks-bento-alt .wp-block-post-excerpt {
+	display: none;
+}
+
+.is-style-ks-grid-4 > .wp-block-post,
+.is-style-ks-bento > .wp-block-post {
+	display: grid;
+	gap: 0.7rem;
+	align-content: start;
+}
+
+/* B. Grid 4 ringkas */
+.wp-block-post-template.is-style-ks-grid-4 {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1.5rem 1rem;
+}
+
+.is-style-ks-grid-4 .wp-block-post-featured-image {
+	aspect-ratio: 16 / 10;
+	border-radius: 12px !important;
+}
+
+.is-style-ks-grid-4 .wp-block-post-title {
+	font-size: var(--wp--preset--font-size--medium);
+	line-height: 1.35;
+}
+
+/* C. Bento: one big card and four small ones. */
+.wp-block-post-template.is-style-ks-bento {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1.5rem 1.25rem;
+}
+
+.is-style-ks-bento .wp-block-post-featured-image {
+	aspect-ratio: 4 / 3;
+}
+
+.is-style-ks-bento .wp-block-post-title {
+	font-size: 1rem;
+	line-height: 1.35;
+}
+
+.is-style-ks-bento > .wp-block-post:first-child {
+	grid-row: span 2;
+	grid-column: span 2;
+}
+
+.is-style-ks-bento > .wp-block-post:first-child .wp-block-post-featured-image {
+	aspect-ratio: 16 / 11;
+}
+
+.is-style-ks-bento > .wp-block-post:first-child .wp-block-post-title {
+	font-size: 1.5rem;
+	line-height: 1.25;
+}
+
+/* D + E. Overlay cards: the photo fills the card, the text sits on a fade.
+ * The photo goes to z-index -1 inside the isolated card, so the text stays
+ * above it without being positioned and the title link can still stretch
+ * over the whole card. */
+.is-style-ks-overlay > .wp-block-post,
+.is-style-ks-bento-alt > .wp-block-post {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	min-height: 240px;
+	overflow: hidden;
+	padding: 1.25rem 1.35rem;
+	border-radius: var(--ks-radius-lg);
+	background: var(--wp--preset--color--navy);
+	color: #fff;
+	isolation: isolate;
+}
+
+.is-style-ks-overlay .wp-block-post-featured-image,
+.is-style-ks-bento-alt .wp-block-post-featured-image {
+	position: absolute !important;
+	inset: 0;
+	z-index: -1;
+	border-radius: 0 !important;
+}
+
+.is-style-ks-overlay .wp-block-post-featured-image::after,
+.is-style-ks-bento-alt .wp-block-post-featured-image::after {
+	position: absolute;
+	inset: 0;
+	background: var(--wp--preset--gradient--photo-fade);
+	content: "";
+}
+
+.wp-block-post-template.is-style-ks-overlay .wp-block-post-featured-image img,
+.wp-block-post-template.is-style-ks-bento-alt .wp-block-post-featured-image img {
+	transition: scale 0.9s var(--ks-ease);
+}
+
+.is-style-ks-overlay .ks-card__body > * + *,
+.is-style-ks-bento-alt .ks-card__body > * + * {
+	margin-top: 0.5rem;
+}
+
+.wp-block-post-template.is-style-ks-overlay .wp-block-post .wp-block-post-title a,
+.wp-block-post-template.is-style-ks-bento-alt .wp-block-post .wp-block-post-title a {
+	color: #fff;
+}
+
+.is-style-ks-overlay .wp-block-post-title,
+.is-style-ks-bento-alt .wp-block-post-title {
+	font-size: 1.125rem;
+	line-height: 1.3;
+}
+
+.is-style-ks-overlay .wp-block-post-date,
+.is-style-ks-bento-alt .wp-block-post-date {
+	color: oklch(92% 0.01 250);
+	font-weight: 700;
+}
+
+.wp-block-post-template.is-style-ks-bento-alt {
+	display: grid;
+	grid-template-columns: 1.2fr 1fr 1fr;
+	grid-auto-rows: minmax(240px, auto);
+	gap: 1.25rem;
+}
+
+.is-style-ks-bento-alt > .wp-block-post:nth-child(1) {
+	grid-row: span 2;
+}
+
+.is-style-ks-bento-alt > .wp-block-post:nth-child(2) {
+	grid-column: span 2;
+}
+
+.is-style-ks-bento-alt > .wp-block-post:nth-child(1) .wp-block-post-title {
+	font-size: 1.5rem;
+	line-height: 1.25;
+}
+
+.wp-block-post-template.is-style-ks-overlay {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1.25rem;
+}
+
+.is-style-ks-overlay > .wp-block-post {
+	aspect-ratio: 3 / 4;
+}
+
+/* F. Spotlight: one wide story, then headlines without photos. */
+.wp-block-post-template.is-style-ks-spotlight {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1.5rem;
+}
+
+.is-style-ks-spotlight > .wp-block-post:first-child {
+	display: grid;
+	grid-template-columns: 1.4fr 1fr;
+	grid-column: 1 / -1;
+	gap: 1.75rem;
+	align-items: center;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid var(--ks-line);
+}
+
+.is-style-ks-spotlight > .wp-block-post:first-child .wp-block-post-featured-image {
+	aspect-ratio: 16 / 10;
+	border-radius: var(--ks-radius-lg) !important;
+}
+
+.is-style-ks-spotlight > .wp-block-post:first-child .wp-block-post-title {
+	font-size: clamp(1.4rem, 1rem + 1.4vw, 2rem);
+	line-height: 1.2;
+}
+
+.is-style-ks-spotlight > .wp-block-post:first-child .wp-block-post-excerpt {
+	margin-top: 0.75rem;
+}
+
+.is-style-ks-spotlight > .wp-block-post:not(:first-child) .wp-block-post-featured-image {
+	display: none;
+}
+
+.is-style-ks-spotlight > .wp-block-post:not(:first-child) .wp-block-post-title {
+	font-size: 1rem;
+	line-height: 1.35;
+}
+
+.is-style-ks-spotlight > .wp-block-post:nth-child(n+3) {
+	padding-left: 1.5rem;
+	border-left: 1px solid var(--ks-line);
+}
+
+/* G. Numbered headlines, no photos. */
+.wp-block-post-template.is-style-ks-headlines {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0 2.5rem;
+	counter-reset: ks-headline;
+}
+
+.is-style-ks-headlines > .wp-block-post {
+	display: grid;
+	grid-template-columns: 2.75rem 1fr;
+	gap: 0.9rem;
+	padding: 1rem 0;
+	border-top: 1px solid var(--ks-line);
+	counter-increment: ks-headline;
+}
+
+.is-style-ks-headlines > .wp-block-post:nth-child(-n+2) {
+	border-top: 0;
+}
+
+.is-style-ks-headlines > .wp-block-post::before {
+	color: var(--ks-brand);
+	font-size: 1.6rem;
+	font-variant-numeric: tabular-nums;
+	font-weight: 800;
+	line-height: 1;
+	content: counter(ks-headline, decimal-leading-zero);
+}
+
+.is-style-ks-headlines .wp-block-post-featured-image {
+	display: none;
+}
+
+.is-style-ks-headlines .wp-block-post-title {
+	font-size: 1rem;
+	line-height: 1.35;
+}
+
+/* H. Timeline: publish time on a line. */
+.wp-block-post-template.is-style-ks-timeline {
+	position: relative;
+	display: grid;
+	max-width: 720px;
+	padding-left: 1.5rem !important;
+}
+
+.is-style-ks-timeline::before {
+	position: absolute;
+	top: 0.5rem;
+	bottom: 0.5rem;
+	left: 5px;
+	width: 2px;
+	background: var(--ks-tint-2);
+	content: "";
+}
+
+.is-style-ks-timeline > .wp-block-post {
+	display: grid;
+	grid-template-columns: 5.5rem 1fr;
+	gap: 1rem;
+	padding: 0.9rem 0;
+}
+
+.is-style-ks-timeline > .wp-block-post::before {
+	position: absolute;
+	top: 1.2rem;
+	left: -1.5rem;
+	width: 12px;
+	height: 12px;
+	border: 3px solid var(--ks-brand);
+	border-radius: 50%;
+	background: var(--ks-bg);
+	content: "";
+}
+
+.is-style-ks-timeline .ks-time {
+	padding-top: 0.1rem;
+	color: var(--ks-brand-ink);
+	font-size: 0.875rem;
+	font-variant-numeric: tabular-nums;
+	font-weight: 800;
+}
+
+.is-style-ks-timeline .wp-block-post-featured-image {
+	display: none;
+}
+
+.is-style-ks-timeline .wp-block-post-title {
+	font-size: 1rem;
+	line-height: 1.35;
+}
+
+@media (max-width: 900px) {
+
+	.wp-block-post-template.is-style-ks-grid-4,
+	.wp-block-post-template.is-style-ks-bento,
+	.wp-block-post-template.is-style-ks-overlay,
+	.wp-block-post-template.is-style-ks-spotlight {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.wp-block-post-template.is-style-ks-bento-alt {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.is-style-ks-bento-alt > .wp-block-post:nth-child(1) {
+		grid-row: auto;
+		grid-column: span 2;
+	}
+
+	.is-style-ks-spotlight > .wp-block-post:first-child {
+		grid-template-columns: 1fr;
+	}
+
+	.is-style-ks-spotlight > .wp-block-post:nth-child(n+3) {
+		padding-left: 0;
+		border-left: 0;
+	}
+
+	.wp-block-post-template.is-style-ks-headlines {
+		grid-template-columns: 1fr;
+	}
+
+	.is-style-ks-headlines > .wp-block-post:nth-child(2) {
+		border-top: 1px solid var(--ks-line);
+	}
+}
+
+@media (max-width: 620px) {
+
+	.wp-block-post-template.is-style-ks-grid-4,
+	.wp-block-post-template.is-style-ks-bento,
+	.wp-block-post-template.is-style-ks-overlay,
+	.wp-block-post-template.is-style-ks-spotlight,
+	.wp-block-post-template.is-style-ks-bento-alt {
+		grid-template-columns: 1fr;
+	}
+
+	.is-style-ks-bento > .wp-block-post:first-child,
+	.is-style-ks-bento-alt > .wp-block-post {
+		grid-row: auto !important;
+		grid-column: auto !important;
+	}
+
+	.is-style-ks-bento-alt > .wp-block-post {
+		min-height: 220px;
+	}
+
+	.is-style-ks-timeline > .wp-block-post {
+		grid-template-columns: 1fr;
+		gap: 0.25rem;
+	}
+}
+
 /* Chips (featured filter, built by theme.js). */
 .ks-chips {
 	display: flex;
@@ -1028,7 +1385,6 @@ body:not(.page) .ks-nav .wp-block-pages-list__item.current-menu-item > .wp-block
 
 /* Reading column. */
 .ks-prose {
-	max-width: 68ch;
 	margin-top: 2rem;
 	color: oklch(28% 0.02 250);
 	font-size: 1.0625rem;
@@ -1037,6 +1393,12 @@ body:not(.page) .ks-nav .wp-block-pages-list__item.current-menu-item > .wp-block
 
 .ks-prose > * + * {
 	margin-top: 1.35rem;
+}
+
+/* Reading measure for article text; wide blocks (card sections on pages)
+   keep their own width. */
+.ks-single .ks-prose {
+	max-width: 68ch;
 }
 
 .ks-prose > p:first-child::first-letter {
@@ -1057,7 +1419,8 @@ body:not(.page) .ks-nav .wp-block-pages-list__item.current-menu-item > .wp-block
 	margin-top: 0.85rem;
 }
 
-.ks-prose a {
+/* Links inside running text only, not card titles inside a page. */
+.ks-prose :where(p, li, td, figcaption) > a {
 	text-decoration: underline;
 	text-decoration-thickness: 1px;
 	text-underline-offset: 3px;

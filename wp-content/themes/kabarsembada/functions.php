@@ -53,11 +53,18 @@ add_action( 'wp_enqueue_scripts', 'kabarsembada_theme_assets' );
 function kabarsembada_register_block_styles() {
 	$styles = array(
 		'core/post-template' => array(
-			'ks-hero'     => __( 'Berita utama', 'kabarsembada' ),
-			'ks-rail'     => __( 'Carousel kartu', 'kabarsembada' ),
-			'ks-featured' => __( 'Pilihan (1 besar + daftar)', 'kabarsembada' ),
-			'ks-feed'     => __( 'Daftar berita', 'kabarsembada' ),
-			'ks-grid'     => __( 'Grid kartu', 'kabarsembada' ),
+			'ks-hero'      => __( 'Berita utama', 'kabarsembada' ),
+			'ks-rail'      => __( 'Carousel kartu', 'kabarsembada' ),
+			'ks-featured'  => __( 'Pilihan (1 besar + daftar)', 'kabarsembada' ),
+			'ks-feed'      => __( 'Daftar berita', 'kabarsembada' ),
+			'ks-grid'      => __( 'Grid 3 kolom', 'kabarsembada' ),
+			'ks-grid-4'    => __( 'Grid 4 ringkas', 'kabarsembada' ),
+			'ks-bento'     => __( 'Bento (1 besar + 4)', 'kabarsembada' ),
+			'ks-bento-alt' => __( 'Bento asimetris', 'kabarsembada' ),
+			'ks-overlay'   => __( 'Overlay potret', 'kabarsembada' ),
+			'ks-spotlight' => __( 'Sorotan', 'kabarsembada' ),
+			'ks-headlines' => __( 'Headline bernomor', 'kabarsembada' ),
+			'ks-timeline'  => __( 'Kronologi', 'kabarsembada' ),
 		),
 		'core/post-terms'    => array(
 			'ks-pill' => __( 'Pil', 'kabarsembada' ),
@@ -267,3 +274,86 @@ function kabarsembada_card_terms_end( $block_content ) {
 	return $block_content;
 }
 add_filter( 'render_block_core/post-terms', 'kabarsembada_card_terms_end' );
+
+/**
+ * Markup of a section with a heading and a Query Loop in one of the card
+ * styles. Shared by patterns/cards-*.php so every variant uses the same card
+ * blocks.
+ *
+ * @param string $style    Post template style slug (ks-grid-4, ks-bento, ...).
+ * @param string $heading  Section heading.
+ * @param int    $per_page Posts to show.
+ * @param string $card     Card kind: photo, overlay, text or time.
+ * @return string Block markup.
+ */
+function kabarsembada_cards_pattern( $style, $heading, $per_page, $card = 'photo' ) {
+	$meta = '<!-- wp:group {"className":"ks-meta","layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group ks-meta"><!-- wp:post-terms {"term":"category","className":"ks-card-term"} /-->
+
+<!-- wp:post-date {"format":"human-diff"} /--></div>
+<!-- /wp:group -->';
+
+	$cards = array(
+		'photo'   => '<!-- wp:post-featured-image {"isLink":true,"sizeSlug":"medium_large"} /-->
+
+<!-- wp:group {"className":"ks-card__body","layout":{"type":"default"}} -->
+<div class="wp-block-group ks-card__body">' . $meta . '
+
+<!-- wp:post-title {"level":3,"isLink":true} /-->
+
+<!-- wp:post-excerpt {"excerptLength":22} /--></div>
+<!-- /wp:group -->',
+		'overlay' => '<!-- wp:post-featured-image {"sizeSlug":"large"} /-->
+
+<!-- wp:group {"className":"ks-card__body","layout":{"type":"default"}} -->
+<div class="wp-block-group ks-card__body"><!-- wp:post-terms {"term":"category","className":"is-style-ks-pill ks-card-term"} /-->
+
+<!-- wp:post-title {"level":3,"isLink":true} /-->
+
+<!-- wp:post-date {"format":"human-diff"} /--></div>
+<!-- /wp:group -->',
+		'text'    => '<!-- wp:group {"className":"ks-card__body","layout":{"type":"default"}} -->
+<div class="wp-block-group ks-card__body">' . $meta . '
+
+<!-- wp:post-title {"level":3,"isLink":true} /--></div>
+<!-- /wp:group -->',
+		'time'    => '<!-- wp:post-date {"format":"H.i","className":"ks-time"} /-->
+
+<!-- wp:group {"className":"ks-card__body","layout":{"type":"default"}} -->
+<div class="wp-block-group ks-card__body"><!-- wp:post-title {"level":3,"isLink":true} /-->
+
+<!-- wp:post-excerpt {"excerptLength":24} /--></div>
+<!-- /wp:group -->',
+	);
+
+	$query = array(
+		'queryId' => (int) wp_unique_id(),
+		'query'   => array(
+			'perPage'  => (int) $per_page,
+			'pages'    => 0,
+			'offset'   => 0,
+			'postType' => 'post',
+			'order'    => 'desc',
+			'orderBy'  => 'date',
+			'author'   => '',
+			'search'   => '',
+			'exclude'  => array(),
+			'sticky'   => 'ignore',
+			'inherit'  => false,
+		),
+	);
+
+	return '<!-- wp:group {"align":"wide","className":"ks-section","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide ks-section"><!-- wp:group {"className":"ks-section__head","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+<div class="wp-block-group ks-section__head"><!-- wp:heading -->
+<h2 class="wp-block-heading">' . esc_html( $heading ) . '</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
+
+<!-- wp:query ' . wp_json_encode( $query ) . ' -->
+<div class="wp-block-query"><!-- wp:post-template {"className":"is-style-' . esc_attr( $style ) . '"} -->
+' . $cards[ $card ] . '
+<!-- /wp:post-template --></div>
+<!-- /wp:query --></div>
+<!-- /wp:group -->';
+}
