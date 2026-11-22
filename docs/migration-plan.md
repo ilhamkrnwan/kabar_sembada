@@ -181,8 +181,8 @@ Setiap langkah SQL dibungkus transaksi. Urutan 2–9 bisa diulang kapan saja
 
 ## 6. Tasks
 
-- [ ] **T4.1** P1 — SEO bawaan plugin 0.2.0 (meta, panel, hapus fallback Yoast).
-- [ ] **T4.2** P2 — redirect `politik-2`.
+- [x] **T4.1** P1 — SEO bawaan plugin 0.2.0 (meta, panel, hapus fallback Yoast).
+- [x] **T4.2** P2 — redirect `politik-2`.
 - [ ] **T4.3** P3 — Docker + WordPress lokal aktif dengan tema & plugin.
 - [ ] **T4.4** Script `00`–`60` + uji `--dry-run` dan `LIMIT 20`.
 - [ ] **T4.5** Run penuh langkah 1–9, review laporan hitungan.
