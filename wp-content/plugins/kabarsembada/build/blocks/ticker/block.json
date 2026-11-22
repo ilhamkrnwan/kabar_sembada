@@ -6,7 +6,7 @@
   "title": "Ticker Terkini",
   "category": "kabarsembada",
   "icon": "megaphone",
-  "description": "Judul berita terbaru yang berjalan, dengan tombol jeda.",
+  "description": "Judul berita terbaru yang berjalan; berhenti saat disorot atau difokus.",
   "keywords": [
     "ticker",
     "terkini",
@@ -35,6 +35,5 @@
   },
   "editorScript": "file:./index.js",
   "style": "file:./style-index.css",
-  "viewScript": "file:./view.js",
   "render": "file:./render.php"
 }

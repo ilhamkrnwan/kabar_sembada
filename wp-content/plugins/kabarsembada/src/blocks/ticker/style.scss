@@ -39,45 +39,6 @@
 			}
 		}
 	}
-
-	&__toggle {
-		display: grid;
-		flex: none;
-		place-items: center;
-		width: 28px;
-		height: 28px;
-		padding: 0;
-		border: 1px solid var(--wp--preset--color--line);
-		border-radius: 50%;
-		background: var(--wp--preset--color--bg);
-		color: var(--wp--preset--color--ink-2);
-		cursor: pointer;
-
-		&:hover {
-			border-color: var(--wp--preset--color--ink-3);
-			color: var(--wp--preset--color--ink);
-		}
-
-		svg {
-			width: 14px;
-			height: 14px;
-			fill: none;
-			stroke: currentcolor;
-			stroke-width: 2;
-			stroke-linecap: round;
-			stroke-linejoin: round;
-		}
-	}
-
-	&__play,
-	&.is-paused .ks-ticker__pause {
-		display: none;
-	}
-
-	&.is-paused .ks-ticker__play {
-		display: inline;
-		fill: currentcolor;
-	}
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -86,9 +47,9 @@
 		animation: ks-ticker 40s linear infinite;
 	}
 
+	// Hover or keyboard focus stops the scroll so a headline can be read.
 	.ks-ticker__viewport:hover .ks-ticker__track,
-	.ks-ticker__viewport:focus-within .ks-ticker__track,
-	.ks-ticker.is-paused .ks-ticker__track {
+	.ks-ticker__viewport:focus-within .ks-ticker__track {
 		animation-play-state: paused;
 	}
 }
@@ -100,14 +61,10 @@
 	}
 }
 
-// Without motion the headlines scroll by hand and the toggle has nothing to do.
+// Without motion the headlines scroll by hand.
 @media (prefers-reduced-motion: reduce) {
 
 	.ks-ticker__viewport {
 		overflow-x: auto;
-	}
-
-	.ks-ticker__toggle {
-		display: none;
 	}
 }

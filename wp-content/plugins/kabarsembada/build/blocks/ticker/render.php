@@ -47,7 +47,4 @@ $ks_links = static function ( $hidden ) use ( $ks_posts ) {
 			<?php echo $ks_links( false ) . $ks_links( true ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped above. ?>
 		</div>
 	</div>
-	<button type="button" class="ks-ticker__toggle" aria-pressed="false" aria-label="<?php esc_attr_e( 'Jeda teks berjalan', 'kabarsembada' ); ?>">
-		<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="ks-ticker__pause" d="M9 6v12M15 6v12"/><path class="ks-ticker__play" d="M8 5.5v13l10-6.5z"/></svg>
-	</button>
 </div>
