@@ -26,14 +26,20 @@ niat. Sumber visual: prototipe `portal_project/theme-1` (layout berita
   panah dari `theme.js`), `ks-featured` (1 besar + daftar, chip kategori dari
   `theme.js`), `ks-feed` (foto kiri 200px), `ks-grid` (3 kolom). Seluruh kartu
   bisa diklik (link judul direntangkan), kategori di atasnya tetap bisa diklik.
+- **Variasi kartu** (pola "Kartu: …", tiap pola = seksi + Query Loop):
+  `ks-grid-4` (4 kolom ringkas), `ks-bento` (1 besar + 4), `ks-bento-alt`
+  (asimetris, judul di atas foto), `ks-overlay` (potret 3 kolom),
+  `ks-spotlight` (1 lebar + 3 judul), `ks-headlines` (bernomor tanpa foto),
+  `ks-timeline` (jam terbit pada garis waktu). Gaya bisa ditukar dari panel
+  Gaya Query Loop.
 - **Kategori di kartu** (`post-terms` dengan class `ks-card-term`) hanya
   menampilkan kategori utama.
 - **Gaya lain**: `post-terms` `ks-pill` / `ks-tags`, `tag-cloud` `ks-pills`,
   `group` `ks-box` (kotak samping) dan `ks-action` (kotak "Yang perlu warga
   lakukan").
 - **Blok plugin**: ticker, tab berita (Terbaru/Paling Dibaca; Fokus per tag —
-  tanpa pilihan editor memakai tag terbanyak 30 hari), Terpopuler, Bagikan,
-  Pencarian (overlay, `/` untuk membuka).
+  tanpa pilihan editor memakai tag artikel terlaris 7 hari), Terpopuler, Bagikan,
+  Pencarian (overlay, `/` untuk membuka), Form Langganan.
 
 ## Halaman
 
