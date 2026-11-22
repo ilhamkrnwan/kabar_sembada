@@ -19,7 +19,7 @@ Portal berita regional Sleman (kabarsembada.com) dibangun ulang sebagai tema blo
 | 9 | Views | Meta `kabarsembada_views`, naik lewat REST ping dari single (aman dengan cache LiteSpeed). Paling Dibaca = all-time; Sedang Ramai = views tertinggi artikel 7 hari terakhir. |
 | 10 | Kurasi | Pilihan Redaksi = post sticky + chip kategori. Fokus Berita = tag dipilih di atribut `post-tabs`. Ticker = post terbaru (opsional filter kategori). Tanpa meta tambahan. |
 | 11 | Newsletter | Form surel di panel CTA (blok `kabarsembada/subscribe`). Alamat disimpan di WordPress (menu Pelanggan, ekspor CSV), belum dikirim. Opt-in ganda + layanan pengirim ditambah sebelum kiriman pertama. Data pelanggan ikut terhapus bila migrasi dijalankan ulang. |
-| 12 | Komentar | Blok core Comments diberi style theme-1. Buka untuk post, tutup untuk page, moderasi default WP. |
+| 12 | Komentar | Dimatikan: tidak ada form di tema, plugin menutup komentar & pingback dan menyembunyikan menu Komentar. |
 | 13 | Navigasi | Header kategori = core Navigation dikelola editor. Tanpa link hardcode. |
 | 14 | Bahasa | String UI front-end & editor langsung Bahasa Indonesia, dibungkus `__()`. Tanpa `.po` dulu. |
 | 15 | Import | Lihat `docs/migration-plan.md`. Sumber `C:\KAIRAV\backup_kabarsembada\` (dump SQL + uploads). Permalink `/%postname%/` dipertahankan. |
