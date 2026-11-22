@@ -124,8 +124,7 @@ body:not(.editor-styles-wrapper) .ks-section:not(:has(.wp-block-post, .ks-tabs, 
 
 /* Line icons drawn with masks, coloured by the text colour. */
 .ks-today::before,
-.ks-topbar__mail::before,
-.ks-account a::before {
+.ks-topbar__mail::before {
 	display: inline-block;
 	flex: none;
 	width: 1.2em;
@@ -181,8 +180,7 @@ body:not(.editor-styles-wrapper) .ks-section:not(:has(.wp-block-post, .ks-tabs, 
 	gap: 0.25rem !important;
 }
 
-/* Account: core Login/out link shown as an icon button; its text stays the
-   accessible name. */
+/* Account: icon button, rendered only for signed-in users (functions.php). */
 .ks-account a {
 	display: grid;
 	place-items: center;
@@ -190,7 +188,6 @@ body:not(.editor-styles-wrapper) .ks-section:not(:has(.wp-block-post, .ks-tabs, 
 	height: 42px;
 	border-radius: 50%;
 	color: var(--ks-ink);
-	font-size: 0;
 	transition: background 0.2s;
 }
 
@@ -198,10 +195,12 @@ body:not(.editor-styles-wrapper) .ks-section:not(:has(.wp-block-post, .ks-tabs, 
 	background: var(--ks-surface);
 }
 
-.ks-account a::before {
-	width: 20px;
-	height: 20px;
-	--ks-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 21a8 8 0 0 1 16 0'/%3E%3C/svg%3E");
+.ks-account svg {
+	fill: none;
+	stroke: currentcolor;
+	stroke-width: 1.75;
+	stroke-linecap: round;
+	stroke-linejoin: round;
 }
 
 .ks-header .ks-search-open {

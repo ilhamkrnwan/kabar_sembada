@@ -169,6 +169,34 @@ function kabarsembada_priority_image( $block_content, $block ) {
 add_filter( 'render_block_core/post-featured-image', 'kabarsembada_priority_image', 10, 2 );
 
 /**
+ * Account button (a core Login/out block with the class ks-account): shown
+ * only to signed-in users, as an icon that opens the dashboard. Visitors have
+ * no account on a news site, so they see nothing.
+ *
+ * @param string $block_content Rendered block.
+ * @param array  $block         Parsed block.
+ * @return string
+ */
+function kabarsembada_account_button( $block_content, $block ) {
+	$class = isset( $block['attrs']['className'] ) ? (string) $block['attrs']['className'] : '';
+
+	if ( false === strpos( $class, 'ks-account' ) ) {
+		return $block_content;
+	}
+
+	if ( ! is_user_logged_in() ) {
+		return '';
+	}
+
+	return sprintf(
+		'<div class="wp-block-loginout ks-account"><a href="%s" aria-label="%s"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></a></div>',
+		esc_url( admin_url() ),
+		esc_attr__( 'Dasbor', 'kabarsembada' )
+	);
+}
+add_filter( 'render_block_core/loginout', 'kabarsembada_account_button', 10, 2 );
+
+/**
  * Show one category on cards: the primary one when the post has several.
  *
  * Only for post-terms blocks inside a .ks-meta group (cards); the article
