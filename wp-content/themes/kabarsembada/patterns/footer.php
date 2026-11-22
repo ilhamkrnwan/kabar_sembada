@@ -13,22 +13,18 @@
 <!-- wp:group {"className":"ks-footer","layout":{"type":"constrained"}} -->
 <div class="wp-block-group ks-footer"><!-- wp:columns {"align":"wide","className":"ks-footer__grid"} -->
 <div class="wp-block-columns alignwide ks-footer__grid"><!-- wp:column {"width":"40%"} -->
-<div class="wp-block-column" style="flex-basis:40%"><!-- wp:group {"className":"ks-logo","layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group ks-logo"><!-- wp:site-logo {"width":38} /-->
+<div class="wp-block-column" style="flex-basis:40%"><!-- wp:pattern {"slug":"kabarsembada/logo"} /-->
 
-<!-- wp:site-title {"level":0} /--></div>
-<!-- /wp:group -->
-
-<!-- wp:site-tagline /-->
+<!-- wp:paragraph {"className":"ks-footer__blurb"} -->
+<p class="ks-footer__blurb"><?php esc_html_e( 'Berita dan informasi Kabupaten Sleman, dari balai kalurahan sampai gedung dewan.', 'kabarsembada' ); ?></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:social-links {"size":"has-small-icon-size","className":"is-style-logos-only ks-socials","layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<ul class="wp-block-social-links has-small-icon-size is-style-logos-only ks-socials"><!-- wp:social-link {"url":"","service":"facebook"} /-->
+<ul class="wp-block-social-links has-small-icon-size is-style-logos-only ks-socials"><!-- wp:social-link {"url":"https://www.facebook.com/kabarsembadadotcom","service":"facebook"} /-->
 
-<!-- wp:social-link {"url":"","service":"x"} /-->
+<!-- wp:social-link {"url":"https://www.instagram.com/kabarsembada","service":"instagram"} /-->
 
-<!-- wp:social-link {"url":"","service":"instagram"} /-->
-
-<!-- wp:social-link {"url":"","service":"youtube"} /--></ul>
+<!-- wp:social-link {"url":"https://www.tiktok.com/@kabar.sembada","service":"tiktok"} /--></ul>
 <!-- /wp:social-links --></div>
 <!-- /wp:column -->
 

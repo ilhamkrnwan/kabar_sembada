@@ -3,7 +3,7 @@
  * Title: Beranda
  * Slug: kabarsembada/home
  * Categories: kabarsembada
- * Description: Hero + tab berita, Sedang Ramai, Pilihan Redaksi, Fokus Berita, dan Berita Terkini dengan Terpopuler.
+ * Description: Hero + tab berita, Sedang Ramai, Pilihan Redaksi, Fokus Berita, Berita Terkini dengan Terpopuler, dan ajakan mengikuti.
  * Inserter: no
  *
  * Sections hide themselves when they have nothing to show (assets/css/theme.css).
@@ -117,3 +117,5 @@
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
 <!-- /wp:group -->
+
+<!-- wp:pattern {"slug":"kabarsembada/cta"} /-->
