@@ -1100,82 +1100,6 @@ body:not(.page) .ks-nav .wp-block-pages-list__item.current-menu-item > .wp-block
 	margin-top: 2.5rem;
 }
 
-/* ---------- Comments ---------- */
-.ks-comments {
-	max-width: 68ch;
-	margin-top: 3rem;
-	padding-top: 2rem;
-	border-top: 1px solid var(--ks-line);
-}
-
-.ks-comments .wp-block-comments-title {
-	font-size: var(--wp--preset--font-size--x-large);
-}
-
-.ks-comments .wp-block-comment-template {
-	margin: 1.5rem 0 0;
-	padding: 0;
-	list-style: none;
-}
-
-.ks-comments .wp-block-comment-template li {
-	margin-bottom: 1.25rem;
-}
-
-.ks-comments .wp-block-comment-template ol {
-	margin-top: 1.25rem;
-	padding-left: 1.5rem;
-	border-left: 2px solid var(--ks-line);
-	list-style: none;
-}
-
-.ks-comment {
-	gap: 0.9rem;
-}
-
-.ks-comment .wp-block-avatar img {
-	border-radius: 50%;
-}
-
-.ks-comment__body {
-	flex: 1;
-	padding: 1rem 1.15rem;
-	border-radius: var(--ks-radius);
-	background: var(--ks-surface);
-}
-
-.ks-comment__body .wp-block-comment-author-name {
-	color: var(--ks-ink);
-	font-weight: 800;
-}
-
-.ks-comment__body .wp-block-comment-content {
-	margin-top: 0.4rem;
-}
-
-.ks-comment__body .wp-block-comment-reply-link a {
-	color: var(--ks-brand-ink);
-	font-size: 0.875rem;
-	font-weight: 800;
-}
-
-.ks-comments .comment-form input:not([type="submit"]):not([type="checkbox"]),
-.ks-comments .comment-form textarea {
-	width: 100%;
-	padding: 0.75rem 1rem;
-	border: 1.5px solid var(--ks-line);
-	border-radius: 12px;
-	background: var(--ks-bg);
-	font: inherit;
-}
-
-.ks-comments .comment-form input:focus,
-.ks-comments .comment-form textarea:focus {
-	border-color: var(--ks-brand-ink);
-	outline: none;
-	box-shadow: 0 0 0 3px var(--ks-tint);
-}
-
 /* ---------- Archive / search ---------- */
 .ks-archive__head {
 	margin-top: 1.5rem;
@@ -1370,6 +1294,10 @@ body:not(.page) .ks-nav .wp-block-pages-list__item.current-menu-item > .wp-block
 
 	.ks-hero > .wp-block-column + .wp-block-column {
 		margin-top: 1.5rem;
+	}
+
+	.ks-columns > .wp-block-column + .wp-block-column {
+		margin-top: 2.5rem;
 	}
 }
 
